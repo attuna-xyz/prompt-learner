@@ -4,6 +4,7 @@ from typing import List
 from examples.example import Example
 
 class TaggingTask(Task):
+    "Tagging"
     def add_example(self, example: Example):
         # Assuming tagging tasks might allow multiple labels per example, adjust accordingly.
         labels = example.label.split(',')  # Example way to handle multiple labels

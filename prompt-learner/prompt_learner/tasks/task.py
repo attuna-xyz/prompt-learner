@@ -4,7 +4,7 @@ from typing import List, Union
 from examples.example import Example
 
 class Task(BaseModel):
-    name: str = Field(..., description="The name of the task.")
+    description: str = Field(..., description="The name of the task.")
     allowed_labels: List[str] = Field(..., description="Allowed labels for the task.")
     examples: List[Example] = []
 

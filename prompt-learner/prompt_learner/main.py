@@ -13,16 +13,26 @@ from examples.example import Example
 # print(openai.invoke("who built you?"))
 # anthropic = Anthropic().llm
 # print(anthropic.invoke("who built you?"))
-task_type="classification"
-task_description="classify the given text as urgent or not urgent"
-openai_template = OpenAICompletionTemplate(task_description,task_type)
-print(openai_template.template)
-anthropic_template = AnthropicCompletionTemplate(task_description,task_type)
-print(anthropic_template.template)
 
-classification_task = ClassificationTask(name="Image Classification", allowed_labels=["Cat", "Dog", "Bird"])
+classification_description="Classify images"
+classification_labels = ["Cat", "Dog", "Bird"]
+
+classification_task = ClassificationTask(description=classification_description,allowed_labels=classification_labels)
 classification_task.add_example(Example(text="A cat", label="Cat"))
 print(classification_task.examples)
-tagging_task = TaggingTask(name="Part of Speech Tagging", allowed_labels=["NOUN", "VERB", "ADJ"])
+tagging_description="Tag parts of speech"
+tagging_allowed_labels = ["NOUN", "VERB", "ADJ"]
+tagging_task = TaggingTask(description=tagging_description, allowed_labels=tagging_allowed_labels)
 tagging_task.add_example(Example(text="The cat sat on the mat", label="NOUN,VERB,ADJ,NOUN"))
 print(tagging_task.examples)
+
+openai_template = OpenAICompletionTemplate(classification_task)
+print(openai_template.template)
+anthropic_template = AnthropicCompletionTemplate(classification_task)
+print(anthropic_template.template)
+
+
+openai_template = OpenAICompletionTemplate(tagging_task)
+print(openai_template.template)
+anthropic_template = AnthropicCompletionTemplate(tagging_task)
+print(anthropic_template.template)
