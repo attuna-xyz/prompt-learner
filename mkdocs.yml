@@ -1,0 +1,15 @@
+site_name: Prompt-Learner
+site_author: Aditya Lahiri, Arshia Arya
+site_description: Modular Prompt Construction & Optimization
+repo_name: prompt-learner
+repo_url: https://github.com/attuna-xyz/prompt-learner
+site_url: https://www.attuna.xyz/prompt-learner
+
+theme:
+  name: material
+plugins:
+  - search
+  - mkdocstrings:
+nav:
+  - reference.md
+  
