@@ -17,6 +17,7 @@ class AnthropicCompletionTemplate(Template):
         <{self.format_examples()}.
         Given the text, you have to now predict the labels from
         list of allowed labels - {self.allowed_labels}
+        Output only the label(s) and close the <label> tag.
         """
     
     def format_examples(self):
@@ -33,4 +34,6 @@ class AnthropicCompletionTemplate(Template):
     def add_prediction_sample(self, text: str):
         """Add prediction sample to task."""
         return f"""{self.prompt}\n
-        <text> {text} </text> """
+        <text> {text} </text>\n
+        <label> """
+        

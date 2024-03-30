@@ -38,3 +38,6 @@ print(anthropic_template.prompt)
 # print(anthropic_template.prompt)
 final_prompt = anthropic_template.add_prediction_sample("A cat")
 print("ANSWER:", classification_task.predict(Anthropic(), final_prompt))
+
+final_prompt = openai_template.add_prediction_sample("A cat")
+print("ANSWER:", classification_task.predict(OpenAI(), final_prompt))
