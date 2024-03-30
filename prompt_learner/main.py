@@ -32,8 +32,9 @@ anthropic_template = AnthropicCompletionTemplate(classification_task)
 print(anthropic_template.prompt)
 
 
-openai_template = OpenAICompletionTemplate(tagging_task)
-print(openai_template.prompt)
-anthropic_template = AnthropicCompletionTemplate(tagging_task)
-print(anthropic_template.prompt)
-
+# openai_template = OpenAICompletionTemplate(tagging_task)
+# print(openai_template.prompt)
+# anthropic_template = AnthropicCompletionTemplate(tagging_task)
+# print(anthropic_template.prompt)
+final_prompt = anthropic_template.add_prediction_sample("A cat")
+print("ANSWER:", classification_task.predict(Anthropic(), final_prompt))

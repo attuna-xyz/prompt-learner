@@ -4,13 +4,15 @@ which is used to interact with the OpenAI API."""
 import os
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
+from adapters.adapter import Adapter
 
 
-class OpenAI:
+class OpenAI(Adapter):
     """An adapter for an OpenAI language model call"""
-    def __init__(self):
+    def __init__(self, temperature: float = 0.0, max_tokens: int = 1024):
+        super().__init__(temperature, max_tokens)
         load_dotenv()
         self.llm = ChatOpenAI(
             openai_api_key=os.getenv('OPENAI_API_KEY'),
-            temperature=0.0,
-            max_tokens=1024)
+            temperature=self.temperature,
+            max_tokens=self.max_tokens)

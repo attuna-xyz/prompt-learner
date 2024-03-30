@@ -3,6 +3,7 @@
 from typing import List
 from pydantic import BaseModel, Field
 from examples.example import Example
+from adapters.adapter import Adapter
 
 
 class Task(BaseModel):
@@ -14,3 +15,7 @@ class Task(BaseModel):
     def add_example(self, example: Example):
         """Add an example to the task."""
         # This method will be overridden in subclasses
+
+    def predict(self, adapter: Adapter, prompt: str):
+        """Predict the label for the given text using the prompt."""
+        return adapter.llm.invoke(prompt)

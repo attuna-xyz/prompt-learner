@@ -29,4 +29,8 @@ class AnthropicCompletionTemplate(Template):
             <label> {example.label}</label>\n
             </example>"""
         return examples_str
-        
+    
+    def add_prediction_sample(self, text: str):
+        """Add prediction sample to task."""
+        return f"""{self.prompt}\n
+        <text> {text} </text> """
