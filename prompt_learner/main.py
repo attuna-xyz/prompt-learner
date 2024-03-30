@@ -9,10 +9,10 @@ from tasks.tagging import TaggingTask
 
 from examples.example import Example
 # Load environment variables from .env file
-openai = OpenAI().llm
-print(openai.invoke("who built you?"))
-anthropic = Anthropic().llm
-print(anthropic.invoke("who built you?"))
+# openai = OpenAI().llm
+# print(openai.invoke("who built you?"))
+# anthropic = Anthropic().llm
+# print(anthropic.invoke("who built you?"))
 
 classification_description="Classify images"
 classification_labels = ["Cat", "Dog", "Bird"]
