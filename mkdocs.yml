@@ -6,7 +6,7 @@ repo_url: https://github.com/attuna-xyz/prompt-learner
 site_url: https://www.attuna.xyz/prompt-learner
 
 theme:
-  name: material
+  name: rtd-dropdown
 plugins:
   - search
   - mkdocstrings:
