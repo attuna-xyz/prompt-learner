@@ -1,0 +1,2 @@
+"""A Generic Optimizer class."""
+
