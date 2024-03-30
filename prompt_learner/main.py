@@ -27,12 +27,13 @@ tagging_task.add_example(Example(text="The cat sat on the mat", label="NOUN,VERB
 print(tagging_task.examples)
 
 openai_template = OpenAICompletionTemplate(classification_task)
-print(openai_template.template)
+print(openai_template.prompt)
 anthropic_template = AnthropicCompletionTemplate(classification_task)
-print(anthropic_template.template)
+print(anthropic_template.prompt)
 
 
 openai_template = OpenAICompletionTemplate(tagging_task)
-print(openai_template.template)
+print(openai_template.prompt)
 anthropic_template = AnthropicCompletionTemplate(tagging_task)
-print(anthropic_template.template)
+print(anthropic_template.prompt)
+
