@@ -1,13 +1,16 @@
-# tasks/task.py
-from pydantic import BaseModel, Field, ValidationError
-from typing import List, Union
+"""Generic Task class."""
+
+from typing import List
+from pydantic import BaseModel, Field
 from examples.example import Example
 
+
 class Task(BaseModel):
-    description: str = Field(..., description="The name of the task.")
-    allowed_labels: List[str] = Field(..., description="Allowed labels for the task.")
+    """Defines the contract for a Generic task."""
+    description: str = Field(description="The name of the task.")
+    allowed_labels: List[str] = Field(description="Allowed labels for task.")
     examples: List[Example] = []
 
     def add_example(self, example: Example):
-        # This method will be overridden in subclasses with specific validations
-        pass
+        """Add an example to the task."""
+        # This method will be overridden in subclasses
