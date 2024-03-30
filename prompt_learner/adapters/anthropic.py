@@ -25,12 +25,11 @@ class Anthropic(Adapter):
         close_tag = "</" + tag + ">"
         try:
             data = (data.split(open_tag)[1]).split(close_tag)[0].strip()
-        except:
-            data = data
+        except IndexError:
+            pass
         data = re.sub(r"^\\n|\\n$", "", data)
         return data
     
     def process_output(self, output: str):
         """Process the output from the language model."""
-        print("LLM REsponse,",output.content.strip())
         return self.extract_xml_tag(output.content.strip(), "label")

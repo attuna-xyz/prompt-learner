@@ -35,5 +35,5 @@ class AnthropicCompletionTemplate(Template):
         """Add prediction sample to task."""
         return f"""{self.prompt}\n
         <text> {text} </text>\n
-        <label> """
+        """
         
