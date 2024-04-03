@@ -8,6 +8,9 @@ from tasks.classification import ClassificationTask
 from tasks.tagging import TaggingTask
 
 from examples.example import Example
+
+from optimizers.selectors.random_sampler import RandomSampler
+from prompts.cot import CoT
 # Load environment variables from .env file
 # openai = OpenAI().llm
 # print(openai.invoke("who built you?"))
@@ -51,15 +54,25 @@ classification_task = ClassificationTask(description=classification_description,
 classification_task.add_example(Example(text="I need help", label="Urgent"))
 classification_task.add_example(Example(text="I got my package", label="Not Urgent"))
 print(classification_task.examples)
-openai_template = OpenAICompletionTemplate(classification_task)
-print(openai_template.prompt)
-anthropic_template = AnthropicCompletionTemplate(classification_task)
-print(anthropic_template.prompt)
-final_prompt = openai_template.add_prediction_sample("My package is missing")
-answer = classification_task.predict(OpenAI(), final_prompt)
+task = classification_task
+openai_template = OpenAICompletionTemplate(task=classification_task)
+sampler = RandomSampler(num_samples=2, task=classification_task)
+sampler.select_examples()
+openai_prompt = CoT(template=openai_template, selector=sampler)
+openai_prompt.assemble_prompt()
+
+openai_prompt.add_inference("My package is missing")
+print(openai_prompt.prompt)
+answer = classification_task.predict(OpenAI(), openai_prompt.prompt)
 print("ANSWER:", answer)
-print("Valid output>", classification_task.validate_prediction("My package is missing", answer))
-final_prompt = anthropic_template.add_prediction_sample("My package is missing")
-answer = classification_task.predict(Anthropic(), final_prompt)
-print("ANSWER:", answer)
-print("Valid output>", classification_task.validate_prediction("My package is missing", answer))
+# anthropic_template = AnthropicCompletionTemplate(classification_task,sampler)
+
+# print(anthropic_template.prompt)
+# final_prompt = openai_template.add_prediction_sample("My package is missing")
+# answer = classification_task.predict(OpenAI(), final_prompt)
+# print("ANSWER:", answer)
+# print("Valid output>", classification_task.validate_prediction("My package is missing", answer))
+# final_prompt = anthropic_template.add_prediction_sample("My package is missing")
+# answer = classification_task.predict(Anthropic(), final_prompt)
+# print("ANSWER:", answer)
+# print("Valid output>", classification_task.validate_prediction("My package is missing", answer))

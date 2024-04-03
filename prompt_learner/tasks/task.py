@@ -11,6 +11,7 @@ class Task(BaseModel):
     description: str = Field(description="The name of the task.")
     allowed_labels: List[str] = Field(description="Allowed labels for task.")
     examples: List[Example] = []
+    selected_examples: List[Example] = []
 
     def validate_example(self, example: Example):
         """Validate the example for the task."""
@@ -22,6 +23,7 @@ class Task(BaseModel):
             raise ValueError(f"""Label '{example.label}' is not in
                              allowed labels for this task.""")
         self.examples.append(example)
+        self.selected_examples.append(example)
 
     def predict(self, adapter: Adapter, prompt: str):
         """Predict the label for the given text using the prompt."""
