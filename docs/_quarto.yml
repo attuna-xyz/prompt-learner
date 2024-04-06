@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: .
 
 website:
   title: "docs"
