@@ -1,16 +1,105 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "docs",
+    "title": "Prompt Learner",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Why Prompt-Learner?\n  \n  \n    \n     Installation\n  \n  \n    \n     Setting up a development environment\n  \n  \n    \n     GitHub"
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "Prompt Learner",
+    "section": "Install",
+    "text": "Install\nPip install prompt-learner\n1pip install prompt-learner\n\n1\n\nInstall prompt-learner"
+  },
+  {
+    "objectID": "index.html#quickstart",
+    "href": "index.html#quickstart",
+    "title": "Prompt Learner",
+    "section": "Quickstart",
+    "text": "Quickstart\nSee the getting started tutorial for a more in-depth introduction to Prompt-learner. Below is a quick overview.\n\nEnsure you install prompt-learner first.\nDefine the task\nAdd a few examples\nChoose an adapter\nSelect some examples\nGet the final prompt\nInfer!\n\n\nPhilosophy\n\n\n\n\n\n\nPhilosophy\nAssemble Prompts Modular"
+  },
+  {
+    "objectID": "getting-started.html",
+    "href": "getting-started.html",
+    "title": "Getting started",
+    "section": "",
+    "text": "Welcome to the Prompt-learner project!\n\nLearning Prompt-learner for the first time?: Check out the getting started tutorial!"
+  },
+  {
+    "objectID": "contribute/index.html",
+    "href": "contribute/index.html",
+    "title": "Contribute",
+    "section": "",
+    "text": "Contribute\nCheck out our contributing guide for details! Guides for setting up an environment and getting started are here.",
+    "crumbs": [
+      "Contribute"
+    ]
+  },
+  {
+    "objectID": "tutorials/getting_started.html",
+    "href": "tutorials/getting_started.html",
+    "title": "Setting up a development environment",
+    "section": "",
+    "text": "Setting up a development environment"
+  },
+  {
+    "objectID": "CONTRIBUTING.html",
+    "href": "CONTRIBUTING.html",
+    "title": "Contributing to Prompt-Learner",
+    "section": "",
+    "text": "Contributing to Prompt-Learner\nWe love new contributors!"
+  },
+  {
+    "objectID": "contribute/01_environment.html",
+    "href": "contribute/01_environment.html",
+    "title": "Setting up a development environment",
+    "section": "",
+    "text": "Setting up a development environment",
+    "crumbs": [
+      "Contribute",
+      "Setting up a development environment"
+    ]
+  },
+  {
+    "objectID": "why.html",
+    "href": "why.html",
+    "title": "Why Prompt-Learner?",
+    "section": "",
+    "text": "Never write strings again.",
+    "crumbs": [
+      "Why Prompt-Learner?"
+    ]
+  },
+  {
+    "objectID": "why.html#what-is-prompt-learner",
+    "href": "why.html#what-is-prompt-learner",
+    "title": "Why Prompt-Learner?",
+    "section": "What is Prompt-Learner?",
+    "text": "What is Prompt-Learner?\nWe break down prompts into modular parts. And optimize them to finally assemble them.\n\nprint(5)\n\n5",
+    "crumbs": [
+      "Why Prompt-Learner?"
+    ]
+  },
+  {
+    "objectID": "why.html#community",
+    "href": "why.html#community",
+    "title": "Why Prompt-Learner?",
+    "section": "Community",
+    "text": "Community\nCommunity discussions primarily take place on GitHub",
+    "crumbs": [
+      "Why Prompt-Learner?"
+    ]
+  },
+  {
+    "objectID": "why.html#getting-started",
+    "href": "why.html#getting-started",
+    "title": "Why Prompt-Learner?",
+    "section": "Getting started",
+    "text": "Getting started\nIf you’re interested in trying Prompt-learner we recommend the getting started tutorial.",
+    "crumbs": [
+      "Why Prompt-Learner?"
+    ]
   }
 ]

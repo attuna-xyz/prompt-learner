@@ -8,11 +8,30 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - getting-started.qmd
+      - sidebar:concepts
+      - why.qmd
+      - install.qmd
+      - sidebar:contribute
+  sidebar:
+  - id: ""
+  - id: concepts
+    title: "Concepts"
+    style: "docked"
+    collapse-level: 2
+    contents:
+      - why.qmd
+      - auto: concepts/*.qmd
+  - id: contribute
+    title: "Contribute"
+    style: "docked"
+    collapse-level: 2
+    contents:
+      - auto: contribute
 
 format:
   html:
-    theme: lumen
+    theme: vapor
     css: styles.css
     toc: true
 

@@ -1,0 +1,23 @@
+---
+title: "Why Prompt-Learner?"
+---
+
+Never write strings again.
+
+## What is Prompt-Learner?
+
+We break down prompts into modular parts. And optimize them to finally assemble them.
+```{python}
+print(5)
+```
+
+
+## Community
+
+Community discussions primarily take place on
+[GitHub](https://github.com/attuna-xyz/prompt-learner/discussions)
+
+## Getting started
+
+If you're interested in trying Prompt-learner we recommend the [getting started
+tutorial](./tutorials/getting_started.qmd).

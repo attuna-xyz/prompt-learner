@@ -1,0 +1,8 @@
+---
+title: "Getting started"
+sidebar: getting-started
+---
+
+Welcome to the Prompt-learner project!
+
+- **Learning Prompt-learner for the first time?:** Check out the [getting started tutorial](./tutorials/getting_started.qmd)!

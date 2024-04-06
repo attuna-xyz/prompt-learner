@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="never write a prompt from scratch again">
 
-<title>docs - Prompt Learner</title>
+<title>docs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,58 +20,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,21 +68,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="docs - Prompt Learner">
-<meta name="twitter:description" content="never write a prompt from scratch again">
-<meta name="twitter:image" content="logo.png">
-<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">docs</span>
     </a>
   </div>
@@ -127,11 +89,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./getting-started.html"> 
+    <a class="nav-link" href="../getting-started.html"> 
 <span class="menu-text">Getting started</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -140,37 +102,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-concepts">    
         <li>
-    <a class="dropdown-item" href="./why.html">
+    <a class="dropdown-item" href="../why.html">
  <span class="dropdown-text">Why Prompt-Learner?</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./concepts/Adapters.html">
+    <a class="dropdown-item" href="../concepts/Adapters.html">
  <span class="dropdown-text">Adapters</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./concepts/Architecture.html">
+    <a class="dropdown-item" href="../concepts/Architecture.html">
  <span class="dropdown-text">Architecture</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./concepts/Selectors.html">
+    <a class="dropdown-item" href="../concepts/Selectors.html">
  <span class="dropdown-text">Selectors</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./concepts/TasksExamples.html">
+    <a class="dropdown-item" href="../concepts/TasksExamples.html">
  <span class="dropdown-text">Tasks &amp; Examples</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./concepts/Templates.html">
+    <a class="dropdown-item" href="../concepts/Templates.html">
  <span class="dropdown-text">Templates</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./why.html"> 
+    <a class="nav-link active" href="../why.html" aria-current="page"> 
 <span class="menu-text">Why Prompt-Learner?</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./install.html"> 
+    <a class="nav-link" href="../install.html"> 
 <span class="menu-text">Installation</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -180,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-contribute">    
         <li class="dropdown-header">Contribute</li>
         <li>
-    <a class="dropdown-item" href="./contribute/01_environment.html">
+    <a class="dropdown-item" href="../contribute/01_environment.html">
  <span class="dropdown-text">Setting up a development environment</span></a>
   </li>  
     </ul>
@@ -191,99 +153,84 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../concepts/Selectors.html">Selectors</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../why.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Why Prompt-Learner?</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../concepts/Adapters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Adapters</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../concepts/Architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Architecture</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../concepts/Selectors.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Selectors</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../concepts/TasksExamples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tasks &amp; Examples</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../concepts/Templates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Templates</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#selectors" id="toc-selectors" class="nav-link active" data-scroll-target="#selectors">Selectors</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 
 
-<div class="quarto-about-jolla content">
-  <img src="logo.svg" class="about-image
-  round " style="height: 15em; width: 15em;">
- <header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Prompt Learner</h1>
-</div>
-<div>
-  <div class="description">
-    never write a prompt from scratch again
-  </div>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header><div id="about">
-</div> 
-  <hr class="about-sep">
-   <div class="about-links">
-  <a href="/why.html" class="about-link" rel="" target="">
-    <i class="bi bi-info-circle"></i>
-     <span class="about-link-text">Why Prompt-Learner?</span>
-  </a>
-  <a href="/install.html" class="about-link" rel="" target="">
-    <i class="bi bi-download"></i>
-     <span class="about-link-text">Installation</span>
-  </a>
-  <a href="/tutorials/getting_started.html" class="about-link" rel="" target="">
-    <i class="bi bi-book"></i>
-     <span class="about-link-text">Setting up a development environment</span>
-  </a>
-  <a href="https://github.com/attuna-xyz/prompt-learner" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">GitHub</span>
-  </a>
-</div>
-</div>
-
-<section id="install" class="level2">
-<h2 data-anchor-id="install">Install</h2>
-<p>Pip install prompt-learner</p>
-<div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode bash code-annotation-code code-with-copy code-annotated"><code class="sourceCode bash"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install prompt-learner</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="1" data-code-annotation="1">Install prompt-learner</span>
-</dd>
-</dl>
-<section id="section" class="level3">
-<h3 data-anchor-id="section"></h3>
-</section>
-</section>
-<section id="quickstart" class="level2">
-<h2 data-anchor-id="quickstart">Quickstart</h2>
-<p>See <a href="./tutorials/getting_started.html">the getting started tutorial</a> for a more in-depth introduction to Prompt-learner. Below is a quick overview.</p>
-<ol type="1">
-<li>Ensure you install prompt-learner first.</li>
-<li>Define the task</li>
-<li>Add a few examples</li>
-<li>Choose an adapter</li>
-<li>Select some examples</li>
-<li>Get the final prompt</li>
-<li>Infer!</li>
-</ol>
-<div class="d-grid gap-2">
-<a class="btn btn-lg btn-primary" data-bs-toggle="collapse" href="#collapsePhilosphy" role="button" aria-expanded="false" aria-controls="collapsePhilosphy">Philosophy</a>
-</div>
-<section id="section-1" class="level3">
-<h3 data-anchor-id="section-1"></h3>
-</section>
-<div id="collapsePhilosphy" class="collapse multi-collapse">
-<section id="philosophy" class="level3">
-<h3 data-anchor-id="philosophy">Philosophy</h3>
-<p>Assemble Prompts Modular</p>
-</section>
-</div>
-<section id="section-2" class="level3">
-<h3 data-anchor-id="section-2"></h3>
+<section id="selectors" class="level1">
+<h1>Selectors</h1>
+<p>Select the best samples</p>
 
 
-
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -307,6 +254,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -630,64 +584,25 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         }
       };
     }
-      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
-      for (let i=0; i<annoteTargets.length; i++) {
-        const annoteTarget = annoteTargets[i];
-        const targetCell = annoteTarget.getAttribute("data-target-cell");
-        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
-        const contentFn = () => {
-          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-          if (content) {
-            const tipContent = content.cloneNode(true);
-            tipContent.classList.add("code-annotation-tip-content");
-            return tipContent.outerHTML;
-          }
-        }
-        const config = {
-          allowHTML: true,
-          content: contentFn,
-          onShow: (instance) => {
-            selectCodeLines(instance.reference);
-            instance.reference.classList.add('code-annotation-active');
-            window.tippy.hideAll();
-          },
-          onHide: (instance) => {
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
             unselectCodeLines();
-            instance.reference.classList.remove('code-annotation-active');
-          },
-          maxWidth: 300,
-          delay: [50, 0],
-          duration: [200, 0],
-          offset: [5, 10],
-          arrow: true,
-          appendTo: function(el) {
-            return el.parentElement.parentElement.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'quarto',
-          placement: 'right',
-          popperOptions: {
-            modifiers: [
-            {
-              name: 'flip',
-              options: {
-                flipVariations: false, // true by default
-                allowedAutoPlacements: ['right'],
-                fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
-              },
-            },
-            {
-              name: 'preventOverflow',
-              options: {
-                mainAxis: false,
-                altAxis: false
-              }
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
             }
-            ]        
-          }      
-        };
-        window.tippy(annoteTarget, config); 
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
       }
   const findCites = (el) => {
     const parentEl = el.parentElement;

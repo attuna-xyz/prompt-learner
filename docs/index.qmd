@@ -1,7 +1,72 @@
 ---
-title: "docs"
+title: "Prompt Learner"
+description: "never write a prompt from scratch again"
+repo-actions: false
+code-annotations: hover
+twitter-card:
+  image: logo.png
+format:
+  html:
+    toc: false
+about:
+  id: about
+  template: jolla
+  image: logo.svg
+  links:
+    - icon: info-circle
+      href: why.qmd
+    - icon: download
+      href: install.qmd
+    - icon: book
+      href: tutorials/getting_started.qmd
+    - icon: github
+      text: GitHub
+      href: https://github.com/attuna-xyz/prompt-learner
 ---
 
-This is a Quarto website.
+::: {#about}
+:::
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## Install
+
+Pip install prompt-learner
+
+```bash
+pip install prompt-learner # <1>
+```
+
+1. Install prompt-learner
+
+###
+
+## Quickstart
+
+See [the getting started tutorial](tutorials/getting_started.qmd) for a more in-depth introduction to Prompt-learner. Below is a quick overview.
+
+1. Ensure you install prompt-learner first.
+2. Define the task
+3. Add a few examples
+4. Choose an adapter
+5. Select some examples
+6. Get the final prompt
+7. Infer!
+
+
+
+
+<div class="d-grid gap-2"><a class="btn btn-lg btn-primary" data-bs-toggle="collapse" href="#collapsePhilosphy" role="button" aria-expanded="false" aria-controls="collapsePhilosphy">Philosophy</a></div>
+
+###
+
+::: {#collapsePhilosphy .collapse .multi-collapse}
+
+### Philosophy
+
+Assemble Prompts
+Modular
+
+:::
+
+
+###
+

@@ -1,1 +1,9 @@
-/* css styles */
+section#parameters {
+  /* scroll when child contents overflow the width */
+  overflow-x: auto;
+}
+
+section[id^="parameters-"] {
+  /* scroll when child contents overflow the width */
+  overflow-x: auto;
+}

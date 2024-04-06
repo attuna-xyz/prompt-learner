@@ -1,0 +1,7 @@
+---
+hide:
+  - toc
+---
+
+# Setting up a development environment
+
