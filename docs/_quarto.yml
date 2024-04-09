@@ -31,8 +31,7 @@ website:
 
 format:
   html:
-    theme: vapor
-    css: styles.css
+    theme: solar
     toc: true
 
 

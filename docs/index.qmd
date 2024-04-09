@@ -29,13 +29,35 @@ about:
 
 ## Install
 
-Pip install prompt-learner
-
 ```bash
 pip install prompt-learner # <1>
 ```
 
 1. Install prompt-learner
+
+<div class="d-grid gap-2"><a class="btn btn-lg btn-primary" data-bs-toggle="collapse" href="#collapsePhilosphy" role="button" aria-expanded="false" aria-controls="collapsePhilosphy">Show Philosophy</a></div>
+
+###
+
+::: {#collapsePhilosphy .collapse .multi-collapse}
+
+### Assembling & Learning Prompts
+
+A prompt is composed of distinct modules. \
+Each module can be optimized both on its own, and as a part of
+the entire system. \
+\
+1. The task type \
+2. The task description \
+3. A few examples \
+4. Instructions for output format \
+5. Custom Prompt Technique specific Instructions \
+\
+
+Prompt Learner is designed to enable *assembly and optimzation* of prompts.\
+
+:::
+
 
 ###
 
@@ -43,30 +65,17 @@ pip install prompt-learner # <1>
 
 See [the getting started tutorial](tutorials/getting_started.qmd) for a more in-depth introduction to Prompt-learner. Below is a quick overview.
 
-1. Ensure you install prompt-learner first.
-2. Define the task
+1. Ensure you install prompt-learner first
+2. Pick your task type
+3. Describe the task
 3. Add a few examples
-4. Choose an adapter
-5. Select some examples
+4. Choose an LLM adapter
+5. Select some examples by running an optimizer
 6. Get the final prompt
-7. Infer!
+7. Infer on your new sample!
 
 
 
 
-<div class="d-grid gap-2"><a class="btn btn-lg btn-primary" data-bs-toggle="collapse" href="#collapsePhilosphy" role="button" aria-expanded="false" aria-controls="collapsePhilosphy">Philosophy</a></div>
 
-###
-
-::: {#collapsePhilosphy .collapse .multi-collapse}
-
-### Philosophy
-
-Assemble Prompts
-Modular
-
-:::
-
-
-###
 

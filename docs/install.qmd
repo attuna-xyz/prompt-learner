@@ -6,5 +6,3 @@ hide:
 ---
 
 # Installation
-
-pip install
