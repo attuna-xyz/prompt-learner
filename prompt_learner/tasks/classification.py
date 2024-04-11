@@ -1,8 +1,8 @@
 """Defines the contract for a classification task."""
 
 from typing import List
-from tasks.task import Task
 from examples.example import Example
+from .task import Task
 
 
 class ClassificationTask(Task):

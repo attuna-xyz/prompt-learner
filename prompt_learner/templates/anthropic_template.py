@@ -1,7 +1,7 @@
 """This module contains the AnthropicCompletionTemplate class"""
 from typing import List
 from examples.example import Example
-from templates.template import Template
+from .template import Template
 
 
 class AnthropicCompletionTemplate(Template):

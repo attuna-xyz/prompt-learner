@@ -1,7 +1,7 @@
 """Defines the contract for a Tagging task."""
 
-from tasks.task import Task
 from examples.example import Example
+from .task import Task
 
 
 class TaggingTask(Task):

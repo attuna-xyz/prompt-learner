@@ -4,7 +4,7 @@ which is used to interact with the OpenAI API."""
 import os
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from adapters.adapter import Adapter
+from .adapter import Adapter
 
 
 class OpenAI(Adapter):

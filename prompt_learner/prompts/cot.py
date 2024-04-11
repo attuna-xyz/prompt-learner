@@ -1,6 +1,6 @@
 """Class for the CoT prompting."""
 from pydantic import Field
-from prompts.prompt import Prompt
+from .prompt import Prompt
 
 
 class CoT(Prompt):

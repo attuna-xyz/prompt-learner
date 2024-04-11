@@ -1,6 +1,6 @@
 """Randomly picks n samples and injects them into the prompt."""
 import random
-from optimizers.selectors.selector import Selector
+from .selector import Selector
 random.seed(42)
 
 

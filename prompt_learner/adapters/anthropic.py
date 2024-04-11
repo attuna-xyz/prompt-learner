@@ -5,7 +5,7 @@ import os
 import re
 from langchain_anthropic import ChatAnthropic
 from dotenv import load_dotenv
-from adapters.adapter import Adapter
+from .adapter import Adapter
 
 
 class Anthropic(Adapter):

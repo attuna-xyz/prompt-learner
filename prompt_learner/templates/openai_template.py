@@ -1,7 +1,7 @@
 """This module contains the OpenAICompletionTemplate class"""
 from typing import List
-from templates.template import Template
 from examples.example import Example
+from .template import Template
 
 
 class OpenAICompletionTemplate(Template):
