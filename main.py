@@ -12,6 +12,7 @@ from prompt_learner.examples.example import Example
 from prompt_learner.optimizers.selectors.random_sampler import RandomSampler
 from prompt_learner.optimizers.selectors.stratified_sampler import StratifiedSampler
 from prompt_learner.prompts.cot import CoT
+from prompt_learner.evals.metrics.accuracy import Accuracy
 # Load environment variables from .env file
 # openai = OpenAI().llm
 # print(openai.invoke("who built you?"))
@@ -63,11 +64,13 @@ sampler = StratifiedSampler(num_samples=1, task=classification_task)
 sampler.select_examples()
 openai_prompt = CoT(template=openai_template, selector=sampler)
 openai_prompt.assemble_prompt()
-
+print("Evals,")
+print(Accuracy(classification_task).compute(openai_prompt, OpenAI()))
 openai_prompt.add_inference("My package is missing")
 print(openai_prompt.prompt)
 answer = classification_task.predict(OpenAI(), openai_prompt.prompt)
 print("ANSWER:", answer)
+
 # anthropic_template = AnthropicCompletionTemplate(classification_task,sampler)
 
 # print(anthropic_template.prompt)
