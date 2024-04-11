@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -164,22 +130,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="./why.html" aria-current="page"> 
 <span class="menu-text">Why Prompt-Learner?</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./install.html"> 
-<span class="menu-text">Installation</span></a>
-  </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-contribute" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Contribute</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-contribute">    
-        <li class="dropdown-header">Contribute</li>
-        <li>
-    <a class="dropdown-item" href="./contribute/01_environment.html">
- <span class="dropdown-text">Setting up a development environment</span></a>
-  </li>  
-    </ul>
-  </li>
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
@@ -249,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-prompt-learner" id="toc-what-is-prompt-learner" class="nav-link active" data-scroll-target="#what-is-prompt-learner">What is Prompt-Learner?</a></li>
+  <li><a href="#focus-areas-of-prompt-learner" id="toc-focus-areas-of-prompt-learner" class="nav-link active" data-scroll-target="#focus-areas-of-prompt-learner">Focus Areas of Prompt-Learner</a></li>
   <li><a href="#community" id="toc-community" class="nav-link" data-scroll-target="#community">Community</a></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a></li>
   </ul>
@@ -277,16 +227,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Never write strings again.</p>
-<section id="what-is-prompt-learner" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-prompt-learner">What is Prompt-Learner?</h2>
-<p>We break down prompts into modular parts. And optimize them to finally assemble them.</p>
-<div id="b070fa05" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>5</code></pre>
-</div>
-</div>
+<p>We are practitioners and researchers ourselves and we keep running into the same problem again and again of writing a new prompt string from scratch, and then optmizing and maintaing it over time.<br>
+We believe that a prompt in itself is too big a unit and too critical a piece of the puzzle to not be broken down into simpler meaningful parts.<br>
+We also believe that swapping in and swapping out different alternatives for these modular parts of a prompt in a systematic and optimization centric paradigm will lead to optmized, maintainable and more understandable prompting.<br>
+There is no systematic and simple tool that allows users to control the granular parts of a prompt and optimize it, and we want to solve this problem with prompt-learner.<br>
+</p>
+<section id="focus-areas-of-prompt-learner" class="level2">
+<h2 class="anchored" data-anchor-id="focus-areas-of-prompt-learner">Focus Areas of Prompt-Learner</h2>
+<p>Prompt Learner focuses on two aspects of prompting -</p>
+<ol type="1">
+<li>Converting a prompt from a single string(or fstring) to well defined modular parts that can eventually be <em>assembled</em> to create the eventual prompt.</li>
+<li>Enable users to programatically modify, replace, mix and match different alternatives in each module of the prompt to <em>optimize</em> the final prompt for performance.</li>
+</ol>
 </section>
 <section id="community" class="level2">
 <h2 class="anchored" data-anchor-id="community">Community</h2>

@@ -1,16 +1,17 @@
 ---
 title: "Why Prompt-Learner?"
 ---
+We are practitioners and researchers ourselves and we keep running into the same problem again and again of writing a new prompt string from scratch, and then optmizing and maintaing it over time. \
+We believe that a prompt in itself is too big a unit and too critical a piece of the puzzle to not be broken down into simpler meaningful parts. \
+We also believe that swapping in and swapping out different alternatives for these modular parts of a prompt in a systematic and optimization centric paradigm will lead to optmized, maintainable and more understandable prompting.\
+There is no systematic and simple tool that allows users to control the granular parts of a prompt and optimize it, and we want to solve this problem with prompt-learner. \
 
-Never write strings again.
+## Focus Areas of Prompt-Learner
 
-## What is Prompt-Learner?
+Prompt Learner focuses on two aspects of prompting - 
 
-We break down prompts into modular parts. And optimize them to finally assemble them.
-```{python}
-print(5)
-```
-
+1. Converting a prompt from a single string(or fstring) to well defined modular parts that can eventually be *assembled* to create the eventual prompt.
+2. Enable users to programatically modify, replace, mix and match different alternatives in each module of the prompt to *optimize* the final prompt for performance. 
 
 ## Community
 

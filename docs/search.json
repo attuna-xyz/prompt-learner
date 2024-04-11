@@ -67,7 +67,7 @@
     "href": "why.html",
     "title": "Why Prompt-Learner?",
     "section": "",
-    "text": "Never write strings again.",
+    "text": "We are practitioners and researchers ourselves and we keep running into the same problem again and again of writing a new prompt string from scratch, and then optmizing and maintaing it over time.\nWe believe that a prompt in itself is too big a unit and too critical a piece of the puzzle to not be broken down into simpler meaningful parts.\nWe also believe that swapping in and swapping out different alternatives for these modular parts of a prompt in a systematic and optimization centric paradigm will lead to optmized, maintainable and more understandable prompting.\nThere is no systematic and simple tool that allows users to control the granular parts of a prompt and optimize it, and we want to solve this problem with prompt-learner.",
     "crumbs": [
       "Why Prompt-Learner?"
     ]
@@ -76,8 +76,8 @@
     "objectID": "why.html#what-is-prompt-learner",
     "href": "why.html#what-is-prompt-learner",
     "title": "Why Prompt-Learner?",
-    "section": "What is Prompt-Learner?",
-    "text": "What is Prompt-Learner?\nWe break down prompts into modular parts. And optimize them to finally assemble them.\n\nprint(5)\n\n5",
+    "section": "",
+    "text": "Prompt Learner focuses on two aspects of prompting -\n\nConverting a prompt from a single string(or fstring) to well defined modular parts that can eventually be assembled to create the eventual prompt.\nEnable users to programatically modify, replace, mix and match different alternatives in each module of the prompt to optimize the final prompt for performance.",
     "crumbs": [
       "Why Prompt-Learner?"
     ]
@@ -114,7 +114,7 @@
     "href": "concepts/Templates.html",
     "title": "Templates",
     "section": "",
-    "text": "Templates\nEvery LLM provider (adapter) and in turn, every LLM, has its own specific nuances and formatting. This is captured in the template. For example, the Claude family of models prefer information enclosed within xml tags. An Anthropic Template takes care of this.\nMore generally, a template also defines the backbone of any prompt. It is composed of a few modular parts - 1. A descriptor : This is the task description 2. Preambles : Prediction Preamble, Examples Preamble - These are blobs of text the come before one instucts the model to give a specific output or when one lets the model know that a few examples for the task will follow. 3. Example Formatting : A way to format and insert selected examples into the prompt. 4. Inference formatting : A way to insert the sample for inference into the prompt",
+    "text": "Templates\nEvery LLM provider (adapter) and in turn, every LLM, has its own specific nuances and formatting. This is captured in the template. For example, the Claude family of models prefer information enclosed within xml tags. An Anthropic Template takes care of this.\nMore generally, a template also defines the backbone of any prompt. It is composed of a few modular parts -\n1. A descriptor : This is the task description.\n2. Preambles : Prediction Preamble, Examples Preamble - These are blobs of text the come before one instucts the model to give a specific output or when one lets the model know that a few examples for the task will follow.\n3. Example Formatting : A way to format and insert selected examples into the prompt.\n4. Inference formatting : A way to insert the sample for inference into the prompt.",
     "crumbs": [
       "Why Prompt-Learner?",
       "Templates"
@@ -162,6 +162,26 @@
     "crumbs": [
       "Why Prompt-Learner?",
       "Architecture"
+    ]
+  },
+  {
+    "objectID": "why.html#why-use-prompt-learner",
+    "href": "why.html#why-use-prompt-learner",
+    "title": "Why Prompt-Learner?",
+    "section": "",
+    "text": "We are practitioners and researchers ourselves and we keep running into the same problem again and again of writing a new prompt string from scratch, and then optmizing and maintaing it over time.\nWe believe that a prompt in itself is too big a unit and too critical a piece of the puzzle to not be broken down into simpler meaningful parts.\nWe also believe that swapping in and swapping out different alternatives for these modular parts of a prompt in a systematic and optimization centric paradigm will lead to optmized, maintainable and more understandable prompting.\nThere is no systematic and simple tool that allows users to control the granular parts of a prompt and optimize it, and we want to solve this problem with prompt-learner.",
+    "crumbs": [
+      "Why Prompt-Learner?"
+    ]
+  },
+  {
+    "objectID": "why.html#focus-areas-of-prompt-learner",
+    "href": "why.html#focus-areas-of-prompt-learner",
+    "title": "Why Prompt-Learner?",
+    "section": "Focus Areas of Prompt-Learner",
+    "text": "Focus Areas of Prompt-Learner\nPrompt Learner focuses on two aspects of prompting -\n\nConverting a prompt from a single string(or fstring) to well defined modular parts that can eventually be assembled to create the eventual prompt.\nEnable users to programatically modify, replace, mix and match different alternatives in each module of the prompt to optimize the final prompt for performance.",
+    "crumbs": [
+      "Why Prompt-Learner?"
     ]
   }
 ]
