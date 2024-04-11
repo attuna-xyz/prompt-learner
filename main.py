@@ -1,16 +1,17 @@
-from adapters.openai import OpenAI
-from adapters.anthropic import Anthropic
+from prompt_learner.adapters.openai import OpenAI
+from prompt_learner.adapters.anthropic import Anthropic
 
-from templates.openai_template import OpenAICompletionTemplate
-from templates.anthropic_template import AnthropicCompletionTemplate
+from prompt_learner.templates.openai_template import OpenAICompletionTemplate
+from prompt_learner.templates.anthropic_template import AnthropicCompletionTemplate
 
-from tasks.classification import ClassificationTask
-from tasks.tagging import TaggingTask
+from prompt_learner.tasks.classification import ClassificationTask
+from prompt_learner.tasks.tagging import TaggingTask
 
-from examples.example import Example
+from prompt_learner.examples.example import Example
 
-from optimizers.selectors.random_sampler import RandomSampler
-from prompts.cot import CoT
+from prompt_learner.optimizers.selectors.random_sampler import RandomSampler
+from prompt_learner.optimizers.selectors.stratified_sampler import StratifiedSampler
+from prompt_learner.prompts.cot import CoT
 # Load environment variables from .env file
 # openai = OpenAI().llm
 # print(openai.invoke("who built you?"))
@@ -53,10 +54,12 @@ classification_labels = ["Urgent", "Not Urgent"]
 classification_task = ClassificationTask(description=classification_description, allowed_labels=classification_labels)
 classification_task.add_example(Example(text="I need help", label="Urgent"))
 classification_task.add_example(Example(text="I got my package", label="Not Urgent"))
+classification_task.add_example(Example(text="I lost my package", label="Urgent"))
+classification_task.add_example(Example(text="Customer service was great!", label="Not Urgent"))
 print(classification_task.examples)
 task = classification_task
 openai_template = OpenAICompletionTemplate(task=classification_task)
-sampler = RandomSampler(num_samples=2, task=classification_task)
+sampler = StratifiedSampler(num_samples=1, task=classification_task)
 sampler.select_examples()
 openai_prompt = CoT(template=openai_template, selector=sampler)
 openai_prompt.assemble_prompt()
