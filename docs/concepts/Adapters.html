@@ -164,22 +164,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="../why.html" aria-current="page"> 
 <span class="menu-text">Why Prompt-Learner?</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../install.html"> 
-<span class="menu-text">Installation</span></a>
-  </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-contribute" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Contribute</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-contribute">    
-        <li class="dropdown-header">Contribute</li>
-        <li>
-    <a class="dropdown-item" href="../contribute/01_environment.html">
- <span class="dropdown-text">Setting up a development environment</span></a>
-  </li>  
-    </ul>
-  </li>
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
@@ -270,13 +254,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Adapters are your connections to LLM providers. We currently support Anthropic and OpenAI. It is very easy to add a new adapter by extending the base Adapter class.<br>
-Adapter should ideally have a corresponding template to it since different LLMs have different formatting of prompts that they are best suited for.<br>
+Adapter should ideally have a corresponding <a href="../concepts/Templates.html">template</a> to it since different LLMs have different formatting of prompts that they are best suited for.<br>
 To use an adapter, you simply need to import an adapter of your choice.</p>
-<div id="770c2958" class="cell" data-execution_count="1">
+<div id="bbfbc58d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.adapters.openai <span class="im">import</span> OpenAI</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Running any inference requires an adapter as a paramter. The inference call is made through the specified LLM adapter.</p>
-<div id="73795dc6" class="cell" data-execution_count="2">
+<div id="4ca12d78" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>classification_task.predict(OpenAI(), openai_prompt.prompt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 

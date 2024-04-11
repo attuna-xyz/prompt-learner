@@ -87,7 +87,7 @@
     "href": "why.html#community",
     "title": "Why Prompt-Learner?",
     "section": "Community",
-    "text": "Community\nCommunity discussions primarily take place on GitHub",
+    "text": "Community\nWe are building a community of developers who believe that prompting is here to stay, and are excited about tinkering with it programatically and systematically. Join our discord.\n\nFor discussions, issues and requests regarding the library, join us on GitHub",
     "crumbs": [
       "Why Prompt-Learner?"
     ]
@@ -158,7 +158,7 @@
     "href": "concepts/Architecture.html",
     "title": "Architecture",
     "section": "",
-    "text": "Architecture\nOverall design explained",
+    "text": "Architecture\n Prompt-learner runs on the above architecture.\nStarting from the left, the user has to decide on 3 aspects -\n1. The Task\n2. A set of Examples\n3. An LLM Adapter\n\nA task and examples feed into the template of choice (Claude, Open AI..).\nThe task and examples also interact with selectors which can pick the best n examples for the task using statistical and machine learning techniques.\nThese selected examples slot into the template, along with any custom instructions from any prompting technique( such as adding ‘think step by step’ for chain of thought prompting) comprise the final prompt.\nThe prompt invokes the LLM through the adapter with any given inference sample to produce the final output.",
     "crumbs": [
       "Why Prompt-Learner?",
       "Architecture"

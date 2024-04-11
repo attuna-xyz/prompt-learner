@@ -1,7 +1,7 @@
 # Selectors
 Selectors are a part of Optimizers and work on picking `n` *best* examples from the entire set of user provided examples for the task. \
-A selector can be as simple as a random example selector that randomly picks up `n` examples from all examples. \
-A selector can also be arbitrarly complex and use feedback from LLM calls on a set of held out examples to decide the importance of a given example. It can use these signals to pick the `n` best examples to insert into the prompt. \
+A selector can be as simple as a random example selector that randomly picks up n examples from all examples. \
+A selector can also be arbitrarly complex and use feedback from LLM calls on a set of held out examples to decide the importance of a given example. It can use these signals to pick the n best examples to insert into the prompt. \
 A selector can also generate synthetic examples and select among them via similar feedback signals. \
 
 ```{python}

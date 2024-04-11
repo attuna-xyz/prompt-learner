@@ -1,3 +1,12 @@
 # Architecture
+![Architecture](images/architecture.png)
+Prompt-learner runs on the above architecture. \
+Starting from the left, the user has to decide on 3 aspects - \
+1. The Task \
+2. A set of Examples \
+3. An LLM Adapter \
 
-Overall design explained
+A [task and examples](TasksExamples.qmd) feed into the [template](Templates.qmd) of choice (Claude, Open AI..).\
+The task and examples also interact with [selectors](Selectors.qmd) which can pick the best n examples for the task using statistical and machine learning techniques. \
+These selected examples slot into the template, along with any custom instructions from any prompting technique( such as adding 'think step by step' for chain of thought prompting) comprise the final prompt. \
+The prompt invokes the LLM through the [adapter](Adapters.qmd) with any given inference sample to produce the final output. \

@@ -130,22 +130,6 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link active" href="../why.html" aria-current="page"> 
 <span class="menu-text">Why Prompt-Learner?</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../install.html"> 
-<span class="menu-text">Installation</span></a>
-  </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-contribute" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Contribute</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-contribute">    
-        <li class="dropdown-header">Contribute</li>
-        <li>
-    <a class="dropdown-item" href="../contribute/01_environment.html">
- <span class="dropdown-text">Setting up a development environment</span></a>
-  </li>  
-    </ul>
-  </li>
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
@@ -227,7 +211,17 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="architecture" class="level1">
 <h1>Architecture</h1>
-<p>Overall design explained</p>
+<p><img src="images/architecture.png" class="img-fluid" alt="Architecture"> Prompt-learner runs on the above architecture.<br>
+Starting from the left, the user has to decide on 3 aspects -<br>
+1. The Task<br>
+2. A set of Examples<br>
+3. An LLM Adapter<br>
+</p>
+<p>A <a href="../concepts/TasksExamples.html">task and examples</a> feed into the <a href="../concepts/Templates.html">template</a> of choice (Claude, Open AI..).<br>
+The task and examples also interact with <a href="../concepts/Selectors.html">selectors</a> which can pick the best n examples for the task using statistical and machine learning techniques.<br>
+These selected examples slot into the template, along with any custom instructions from any prompting technique( such as adding ‘think step by step’ for chain of thought prompting) comprise the final prompt.<br>
+The prompt invokes the LLM through the <a href="../concepts/Adapters.html">adapter</a> with any given inference sample to produce the final output.<br>
+</p>
 
 
 </section>

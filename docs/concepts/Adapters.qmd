@@ -1,6 +1,6 @@
 # Adapters
 Adapters are your connections to LLM providers. We currently support Anthropic and OpenAI. It is very easy to add a new adapter by extending the base Adapter class. \
-Adapter should ideally have a corresponding template to it since different LLMs have different formatting of prompts that they are best suited for. \
+Adapter should ideally have a corresponding [template](Templates.qmd) to it since different LLMs have different formatting of prompts that they are best suited for. \
 To use an adapter, you simply need to import an adapter of your choice.
 ```{python}
 #| eval: false

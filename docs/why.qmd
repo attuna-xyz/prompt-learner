@@ -15,8 +15,9 @@ Prompt Learner focuses on two aspects of prompting -
 
 ## Community
 
-Community discussions primarily take place on
-[GitHub](https://github.com/attuna-xyz/prompt-learner/discussions)
+We are building a community of developers who believe that prompting is here to stay, and are excited about tinkering with it programatically and systematically. Join our [discord](https://discord.gg/FST9HRNKYX). \
+
+For discussions, issues and requests regarding the library, join us on [GitHub](https://github.com/attuna-xyz/prompt-learner/discussions)
 
 ## Getting started
 
