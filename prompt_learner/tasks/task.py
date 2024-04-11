@@ -2,8 +2,8 @@
 
 from typing import List
 from pydantic import BaseModel, Field
-from examples.example import Example
-from adapters.adapter import Adapter
+from prompt_learner.examples.example import Example
+from prompt_learner.adapters.adapter import Adapter
 
 
 class Task(BaseModel):

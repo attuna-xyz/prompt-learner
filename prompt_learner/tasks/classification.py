@@ -1,7 +1,7 @@
 """Defines the contract for a classification task."""
 
 from typing import List
-from examples.example import Example
+from prompt_learner.examples.example import Example
 from .task import Task
 
 

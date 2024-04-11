@@ -1,6 +1,6 @@
 """Defines the contract for a Tagging task."""
 
-from examples.example import Example
+from prompt_learner.examples.example import Example
 from .task import Task
 
 

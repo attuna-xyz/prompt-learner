@@ -1,3 +1,13 @@
 # Adapters
-
-Open AI, Anthropic
+Adapters are your connections to LLM providers. We currently support Anthropic and OpenAI. It is very easy to add a new adapter by extending the base Adapter class. \
+Adapter should ideally have a corresponding template to it since different LLMs have different formatting of prompts that they are best suited for. \
+To use an adapter, you simply need to import an adapter of your choice.
+```{python}
+#| eval: false
+from prompt_learner.adapters.openai import OpenAI
+```
+Running any inference requires an adapter as a paramter. The inference call is made through the specified LLM adapter.
+```{python}
+#| eval: false
+classification_task.predict(OpenAI(), openai_prompt.prompt)
+```

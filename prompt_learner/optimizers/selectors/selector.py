@@ -1,8 +1,8 @@
 """A Generic Example Selector class."""
 from typing import List
 from pydantic import BaseModel, Field
-from tasks.task import Task
-from examples.example import Example
+from prompt_learner.tasks.task import Task
+from prompt_learner.examples.example import Example
 
 
 class Selector(BaseModel):

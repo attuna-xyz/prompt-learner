@@ -2,8 +2,8 @@
 
 from typing import List, Any
 from pydantic import BaseModel, Field
-from tasks.task import Task
-from examples.example import Example
+from prompt_learner.tasks.task import Task
+from prompt_learner.examples.example import Example
 
 
 class Template(BaseModel):

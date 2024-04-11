@@ -1,2 +1,5 @@
 # Tasks & Examples
-User provided tasks and examples.
+A user has to be always provide prompt-learner with *task* and *examples*. \ 
+A task comprises of the description of the task, the type of task and a valid set of labels for the task(if applicable). \
+An example is a data sample for the task and will have a corresponding text and label(if applicable). \
+A combination of a well-specified task and examples guides the prompt-learning pipeline. \

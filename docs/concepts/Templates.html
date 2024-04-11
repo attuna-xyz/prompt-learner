@@ -35,10 +35,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,7 +68,6 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
@@ -228,7 +227,8 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="templates" class="level1">
 <h1>Templates</h1>
-<p>Claude vs GPT</p>
+<p>Every LLM provider (adapter) and in turn, every LLM, has its own specific nuances and formatting. This is captured in the template. For example, the Claude family of models prefer information enclosed within xml tags. An Anthropic Template takes care of this.<br>
+More generally, a template also defines the backbone of any prompt. It is composed of a few modular parts - 1. A descriptor : This is the task description 2. Preambles : Prediction Preamble, Examples Preamble - These are blobs of text the come before one instucts the model to give a specific output or when one lets the model know that a few examples for the task will follow. 3. Example Formatting : A way to format and insert selected examples into the prompt. 4. Inference formatting : A way to insert the sample for inference into the prompt</p>
 
 
 </section>

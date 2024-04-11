@@ -1,3 +1,12 @@
 # Selectors
+Selectors are a part of Optimizers and work on picking `n` *best* examples from the entire set of user provided examples for the task. \
+A selector can be as simple as a random example selector that randomly picks up `n` examples from all examples. \
+A selector can also be arbitrarly complex and use feedback from LLM calls on a set of held out examples to decide the importance of a given example. It can use these signals to pick the `n` best examples to insert into the prompt. \
+A selector can also generate synthetic examples and select among them via similar feedback signals. \
 
-Select the best samples
+```{python}
+#| eval: false
+from prompt_learner.optimizers.selectors import random_sampler
+random_sampler.RandomSampler(num_samples=2,task=classification_task)
+```
+This will select 2 samples from the set of all examples attached to the `classification_task`. These 2 selected samples will be inserted into the prompt as few shot examples when the prompt is assembled.

@@ -1,6 +1,6 @@
 """This module contains the OpenAICompletionTemplate class"""
 from typing import List
-from examples.example import Example
+from prompt_learner.examples.example import Example
 from .template import Template
 
 

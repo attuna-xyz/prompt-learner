@@ -18,14 +18,14 @@
     "href": "index.html#quickstart",
     "title": "Prompt Learner",
     "section": "Quickstart",
-    "text": "Quickstart\nSee the getting started tutorial for a more in-depth introduction to Prompt-learner. Below is a quick overview.\n\nEnsure you install prompt-learner first.\nPick your task type\nDescribe the task\nAdd a few examples\nChoose an LLM adapter\nSelect some examples by running an optimizer\nGet the final prompt\nInfer on your new sample!"
+    "text": "Quickstart\nSee the getting started tutorial for a more in-depth introduction to Prompt-learner. Below is a quick overview.\n\nEnsure you install prompt-learner first\nPick your task type\nDescribe the task\nAdd a few examples\nChoose an LLM adapter\nSelect some examples by running an optimizer\nGet the final prompt\nInfer on your new sample!"
   },
   {
     "objectID": "getting-started.html",
     "href": "getting-started.html",
     "title": "Getting started",
     "section": "",
-    "text": "Using Prompt-Learner\nHere is a step by step approach to run prompt-learner to optimize and assemble a prompt for any classification task.\n\nPrompt-learner for Classification Task\n\nDescribe your task\n\n\nclassification_description = \"You have to classify customer texts as Urgent or Not Urgent\"\n\n\nSpecify allowed labels\n\n\nclassification_labels = [\"Urgent\", \"Not Urgent\"]\n\n\nCreate the classification task\n\n\nfrom tasks.classification import ClassificationTask\nclassification_task = ClassificationTask(description=classification_description, allowed_labels=classification_labels)\n\n\nAdd a few examples to your task\n\n\nlassification_task.add_example(Example(text=\"I need help\", label=\"Urgent\"))\nclassification_task.add_example(Example(text=\"I got my package\", label=\"Not Urgent\"))\n\n\nChoose an LLM Provider template\n\n\nfrom templates.openai_template import OpenAICompletionTemplate\nopenai_template = OpenAICompletionTemplate(task=classification_task)\n\n\nRun any Optimizer to sample Examples for inserting in prompt\n\n\nfrom optimizers.selectors.random_sampler import RandomSampler\nsampler = RandomSampler(num_samples=1, task=classification_task)\nsampler.select_examples()\n\n\nAssemble the prompt with selected examples, and any prompting technique (example, Chain of Thought)\n\n\nfrom prompts.cot import CoT\nopenai_prompt = CoT(template=openai_template, selector=sampler)\nopenai_prompt.assemble_prompt()\n\n\nView your prompt!\n\n\nopenai_prompt.prompt\n\n\nInfer using your prompt\n\n\nfrom adapters.openai import OpenAI\nopenai_prompt.add_inference(\"My package is missing\")\n\nanswer = classification_task.predict(OpenAI(), openai_prompt.prompt)"
+    "text": "Using Prompt-Learner\nHere is a step by step approach to run prompt-learner to optimize and assemble a prompt for any classification task.\n\nPrompt-learner for Classification Task\n\nDescribe your task\n\n\nclassification_description = \"You have to classify customer texts as Urgent or Not Urgent\"\n\n\nSpecify allowed labels\n\n\nclassification_labels = [\"Urgent\", \"Not Urgent\"]\n\n\nCreate the classification task\n\n\nfrom prompt_learner.tasks import classification\nclassification_task = classification.ClassificationTask(description=classification_description, allowed_labels=classification_labels)\n\n\nAdd a few examples to your task\n\n\nfrom prompt_learner.examples import Example\nclassification_task.add_example(Example(text=\"I need help\", label=\"Urgent\"))\nclassification_task.add_example(Example(text=\"I got my package\", label=\"Not Urgent\"))\n\n\nChoose an LLM Provider template\n\n\nfrom prompt_learner.templates import openai_template\nopenai_template = openai_template.OpenAICompletionTemplate(task=classification_task)\n\n\nRun any Optimizer to sample Examples for inserting in prompt\n\n\nfrom prompt_learner.optimizers.selectors import random_sampler\nsampler = random_sampler.RandomSampler(num_samples=1, task=classification_task)\nsampler.select_examples()\n\n\nAssemble the prompt with selected examples, and any prompting technique (example, Chain of Thought)\n\n\nfrom prompt_learner.prompts import cot\nopenai_prompt = cot.CoT(template=openai_template, selector=sampler)\nopenai_prompt.assemble_prompt()\n\n\nView your prompt!\n\n\nopenai_prompt.prompt\n\n\nInfer using your prompt\n\n\nfrom prompt_learner.adapters.openai import OpenAI\nopenai_prompt.add_inference(\"My package is missing\")\n\nanswer = classification_task.predict(OpenAI(), openai_prompt.prompt)"
   },
   {
     "objectID": "contribute/index.html",
@@ -42,7 +42,7 @@
     "href": "tutorials/getting_started.html",
     "title": "Getting started",
     "section": "",
-    "text": "Using Prompt-Learner\nHere is a step by step approach to run prompt-learner to optimize and assemble a prompt for any classification task.\n\nPrompt-learner for Classification Task\n\nDescribe your task\n\n\nclassification_description = \"You have to classify customer texts as Urgent or Not Urgent\"\n\n\nSpecify allowed labels\n\n\nclassification_labels = [\"Urgent\", \"Not Urgent\"]\n\n\nCreate the classification task\n\n\nfrom tasks.classification import ClassificationTask\nclassification_task = ClassificationTask(description=classification_description, allowed_labels=classification_labels)\n\n\nAdd a few examples to your task\n\n\nlassification_task.add_example(Example(text=\"I need help\", label=\"Urgent\"))\nclassification_task.add_example(Example(text=\"I got my package\", label=\"Not Urgent\"))\n\n\nChoose an LLM Provider template\n\n\nfrom templates.openai_template import OpenAICompletionTemplate\nopenai_template = OpenAICompletionTemplate(task=classification_task)\n\n\nRun any Optimizer to sample Examples for inserting in prompt\n\n\nfrom optimizers.selectors.random_sampler import RandomSampler\nsampler = RandomSampler(num_samples=1, task=classification_task)\nsampler.select_examples()\n\n\nAssemble the prompt with selected examples, and any prompting technique (example, Chain of Thought)\n\n\nfrom prompts.cot import CoT\nopenai_prompt = CoT(template=openai_template, selector=sampler)\nopenai_prompt.assemble_prompt()\n\n\nView your prompt!\n\n\nopenai_prompt.prompt\n\n\nInfer using your prompt\n\n\nfrom adapters.openai import OpenAI\nopenai_prompt.add_inference(\"My package is missing\")\n\nanswer = classification_task.predict(OpenAI(), openai_prompt.prompt)"
+    "text": "Using Prompt-Learner\nHere is a step by step approach to run prompt-learner to optimize and assemble a prompt for any classification task.\n\nPrompt-learner for Classification Task\n\nDescribe your task\n\n\nclassification_description = \"You have to classify customer texts as Urgent or Not Urgent\"\n\n\nSpecify allowed labels\n\n\nclassification_labels = [\"Urgent\", \"Not Urgent\"]\n\n\nCreate the classification task\n\n\nfrom prompt_learner.tasks import classification\nclassification_task = classification.ClassificationTask(description=classification_description, allowed_labels=classification_labels)\n\n\nAdd a few examples to your task\n\n\nfrom prompt_learner.examples import Example\nclassification_task.add_example(Example(text=\"I need help\", label=\"Urgent\"))\nclassification_task.add_example(Example(text=\"I got my package\", label=\"Not Urgent\"))\n\n\nChoose an LLM Provider template\n\n\nfrom prompt_learner.templates import openai_template\nopenai_template = openai_template.OpenAICompletionTemplate(task=classification_task)\n\n\nRun any Optimizer to sample Examples for inserting in prompt\n\n\nfrom prompt_learner.optimizers.selectors import random_sampler\nsampler = random_sampler.RandomSampler(num_samples=1, task=classification_task)\nsampler.select_examples()\n\n\nAssemble the prompt with selected examples, and any prompting technique (example, Chain of Thought)\n\n\nfrom prompt_learner.prompts import cot\nopenai_prompt = cot.CoT(template=openai_template, selector=sampler)\nopenai_prompt.assemble_prompt()\n\n\nView your prompt!\n\n\nopenai_prompt.prompt\n\n\nInfer using your prompt\n\n\nfrom prompt_learner.adapters.openai import OpenAI\nopenai_prompt.add_inference(\"My package is missing\")\n\nanswer = classification_task.predict(OpenAI(), openai_prompt.prompt)"
   },
   {
     "objectID": "CONTRIBUTING.html",
@@ -108,5 +108,60 @@
     "title": "Installation",
     "section": "",
     "text": "Installation"
+  },
+  {
+    "objectID": "concepts/Templates.html",
+    "href": "concepts/Templates.html",
+    "title": "Templates",
+    "section": "",
+    "text": "Templates\nEvery LLM provider (adapter) and in turn, every LLM, has its own specific nuances and formatting. This is captured in the template. For example, the Claude family of models prefer information enclosed within xml tags. An Anthropic Template takes care of this.\nMore generally, a template also defines the backbone of any prompt. It is composed of a few modular parts - 1. A descriptor : This is the task description 2. Preambles : Prediction Preamble, Examples Preamble - These are blobs of text the come before one instucts the model to give a specific output or when one lets the model know that a few examples for the task will follow. 3. Example Formatting : A way to format and insert selected examples into the prompt. 4. Inference formatting : A way to insert the sample for inference into the prompt",
+    "crumbs": [
+      "Why Prompt-Learner?",
+      "Templates"
+    ]
+  },
+  {
+    "objectID": "concepts/Adapters.html",
+    "href": "concepts/Adapters.html",
+    "title": "Adapters",
+    "section": "",
+    "text": "Adapters are your connections to LLM providers. We currently support Anthropic and OpenAI. It is very easy to add a new adapter by extending the base Adapter class.\nAdapter should ideally have a corresponding template to it since different LLMs have different formatting of prompts that they are best suited for.\nTo use an adapter, you simply need to import an adapter of your choice.\n\nfrom prompt_learner.adapters.openai import OpenAI\n\nRunning any inference requires an adapter as a paramter. The inference call is made through the specified LLM adapter.\n\nclassification_task.predict(OpenAI(), openai_prompt.prompt)",
+    "crumbs": [
+      "Why Prompt-Learner?",
+      "Adapters"
+    ]
+  },
+  {
+    "objectID": "concepts/Selectors.html",
+    "href": "concepts/Selectors.html",
+    "title": "Selectors",
+    "section": "",
+    "text": "Selectors are a part of Optimizers and work on picking n best examples from the entire set of user provided examples for the task.\nA selector can be as simple as a random example selector that randomly picks up n examples from all examples.\nA selector can also be arbitrarly complex and use feedback from LLM calls on a set of held out examples to decide the importance of a given example. It can use these signals to pick the n best examples to insert into the prompt.\nA selector can also generate synthetic examples and select among them via similar feedback signals.\n\n\nfrom prompt_learner.optimizers.selectors import random_sampler\nrandom_sampler.RandomSampler(num_samples=2,task=classification_task)\n\nThis will select 2 samples from the set of all examples attached to the classification_task. These 2 selected samples will be inserted into the prompt as few shot examples when the prompt is assembled.",
+    "crumbs": [
+      "Why Prompt-Learner?",
+      "Selectors"
+    ]
+  },
+  {
+    "objectID": "concepts/TasksExamples.html",
+    "href": "concepts/TasksExamples.html",
+    "title": "Tasks & Examples",
+    "section": "",
+    "text": "Tasks & Examples\nA user has to be always provide prompt-learner with task and examples.   A task comprises of the description of the task, the type of task and a valid set of labels for the task(if applicable).\nAn example is a data sample for the task and will have a corresponding text and label(if applicable).\nA combination of a well-specified task and examples guides the prompt-learning pipeline.",
+    "crumbs": [
+      "Why Prompt-Learner?",
+      "Tasks & Examples"
+    ]
+  },
+  {
+    "objectID": "concepts/Architecture.html",
+    "href": "concepts/Architecture.html",
+    "title": "Architecture",
+    "section": "",
+    "text": "Architecture\nOverall design explained",
+    "crumbs": [
+      "Why Prompt-Learner?",
+      "Architecture"
+    ]
   }
 ]
