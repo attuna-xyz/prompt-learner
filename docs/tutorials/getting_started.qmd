@@ -56,7 +56,14 @@ openai_prompt.assemble_prompt()
 #| eval: false
 openai_prompt.prompt
 ```
-9. Infer using your prompt
+9. Evaluate performance of your prompt.
+```{python}
+#| eval: false
+from prompt_learner.evals.metrics.accuracy import Accuracy
+acc_score = Accuracy(classification_task).compute(openai_prompt, OpenAI())
+# automatically runs evaluation on all examples that are not in the prompt
+```
+10. Infer using your prompt
 ```{python}
 #| eval: false
 from prompt_learner.adapters.openai import OpenAI

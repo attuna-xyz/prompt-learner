@@ -254,11 +254,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Selectors are a part of Optimizers and work on picking <code>n</code> <em>best</em> examples from the entire set of user provided examples for the task.<br>
-A selector can be as simple as a random example selector that randomly picks up <code>n</code> examples from all examples.<br>
-A selector can also be arbitrarly complex and use feedback from LLM calls on a set of held out examples to decide the importance of a given example. It can use these signals to pick the <code>n</code> best examples to insert into the prompt.<br>
+A selector can be as simple as a random example selector that randomly picks up n examples from all examples.<br>
+A selector can also be arbitrarly complex and use feedback from LLM calls on a set of held out examples to decide the importance of a given example. It can use these signals to pick the n best examples to insert into the prompt.<br>
 A selector can also generate synthetic examples and select among them via similar feedback signals.<br>
 </p>
-<div id="239d4afd" class="cell" data-execution_count="1">
+<div id="503d58a7" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.optimizers.selectors <span class="im">import</span> random_sampler</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>random_sampler.RandomSampler(num_samples<span class="op">=</span><span class="dv">2</span>,task<span class="op">=</span>classification_task)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
