@@ -33,9 +33,9 @@ with open("data/support_texts_test.csv") as f:
 
 task = classification_task
 openai_template = OpenAICompletionTemplate(task=classification_task)
-sampler = RandomSampler(num_samples=1, task=classification_task)
+sampler = StratifiedSampler(num_samples=2, task=classification_task)
 sampler.select_examples()
-openai_prompt = Prompt(template=openai_template, selector=sampler)
+openai_prompt = CoT(template=openai_template, selector=sampler)
 openai_prompt.assemble_prompt()
 print(openai_prompt.prompt)
 print("Evals,")
@@ -43,7 +43,7 @@ acc, num_total_samplers = Accuracy(classification_task).compute(openai_prompt, O
 print("got a val accuracy of ", acc, " with ", num_total_samplers, " eval samples")
 acc, num_total_samplers = Accuracy(classification_task).compute(openai_prompt, OpenAI(),test=True)
 print("got a test accuracy of ", acc, " with ", num_total_samplers, " eval samples")
-sampler = DiverseSampler(num_samples=3, task=classification_task)
+sampler = DiverseSampler(num_samples=4, task=classification_task)
 sampler.select_examples()
 openai_prompt = CoT(template=openai_template, selector=sampler)
 openai_prompt.assemble_prompt()
