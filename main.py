@@ -11,6 +11,7 @@ from prompt_learner.examples.example import Example
 
 from prompt_learner.optimizers.selectors.random_sampler import RandomSampler
 from prompt_learner.optimizers.selectors.stratified_sampler import StratifiedSampler
+from prompt_learner.optimizers.selectors.diverse_sampler import DiverseSampler
 from prompt_learner.prompts.cot import CoT
 from prompt_learner.evals.metrics.accuracy import Accuracy
 # Load environment variables from .env file
@@ -56,20 +57,25 @@ classification_task = ClassificationTask(description=classification_description,
 classification_task.add_example(Example(text="I need help", label="Urgent"))
 classification_task.add_example(Example(text="I got my package", label="Not Urgent"))
 classification_task.add_example(Example(text="I lost my package", label="Urgent"))
+classification_task.add_example(Example(text="I could not find my package", label="Urgent"))
 classification_task.add_example(Example(text="Customer service was great!", label="Not Urgent"))
+classification_task.add_example(Example(text="Amazing customer support!", label="Not Urgent"))
 print(classification_task.examples)
 task = classification_task
 openai_template = OpenAICompletionTemplate(task=classification_task)
-sampler = StratifiedSampler(num_samples=1, task=classification_task)
+sampler = DiverseSampler(num_samples=3, task=classification_task)
 sampler.select_examples()
 openai_prompt = CoT(template=openai_template, selector=sampler)
 openai_prompt.assemble_prompt()
-print("Evals,")
-print(Accuracy(classification_task).compute(openai_prompt, OpenAI()))
-openai_prompt.add_inference("My package is missing")
 print(openai_prompt.prompt)
-answer = classification_task.predict(OpenAI(), openai_prompt.prompt)
-print("ANSWER:", answer)
+# print("Evals,")
+# print(Accuracy(classification_task).compute(openai_prompt, OpenAI()))
+# openai_prompt.add_inference("My package is missing")
+# print(openai_prompt.prompt)
+# answer = classification_task.predict(OpenAI(), openai_prompt.prompt)
+# print("ANSWER:", answer)
+
+#--
 
 # anthropic_template = AnthropicCompletionTemplate(classification_task,sampler)
 
