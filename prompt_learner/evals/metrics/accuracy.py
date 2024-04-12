@@ -10,7 +10,7 @@ class Accuracy:
     def __init__(self, task: Task):
         self.task = task
 
-    def compute(self, prompt: Prompt, adapter: Adapter):
+    def compute(self, prompt: Prompt, adapter: Adapter) -> tuple[float, int]:
         """Compute the accuracy of the model."""
         correct = 0
         total = 0
@@ -22,4 +22,4 @@ class Accuracy:
                 prediction = self.task.predict(adapter, temp_prompt.prompt)
                 if example.label == prediction:
                     correct += 1
-        return correct / total
+        return (correct / total, total)
