@@ -12,6 +12,7 @@ class RandomSampler(Selector):
         random.shuffle(self.all_examples)
         self.selected_examples = self.all_examples[:self.num_samples]
         self.task.selected_examples = self.selected_examples
+        return self
 
     def __repr__(self):
         return f"""RandomSampler(task={self.task},

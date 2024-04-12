@@ -1,13 +1,14 @@
 """A class for a Generic Prompt."""
 from pydantic import Field, BaseModel
 from prompt_learner.optimizers.selectors.selector import Selector
+from prompt_learner.optimizers.selectors.random_sampler import RandomSampler
 from prompt_learner.templates.template import Template
 
 
 class Prompt(BaseModel):
     """Defines the contract for a Generic Prompt."""
-    selector: Selector
     template: Template
+    selector: Selector = Field(description="Selector for the task.")
     prompt: str = Field(description="Final prompt string.", default="")
 
     def select_examples(self):

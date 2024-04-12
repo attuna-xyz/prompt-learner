@@ -10,7 +10,7 @@ class Selector(BaseModel):
     all_examples: List[Example] = []
     selected_examples: List[Example] = []
     task: Task
-    num_samples: int = Field(description="Number of examples to samples")
+    num_samples: int = Field(description="Number of examples to samples", default=1)
     
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
