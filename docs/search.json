@@ -11,7 +11,7 @@
     "href": "index.html#install",
     "title": "Prompt Learner",
     "section": "Install",
-    "text": "Install\n1pip install prompt-learner\n\n1\n\nInstall prompt-learner\n\n\n\nRead Philosophy\n\n\n\n\n\n\nAssembling & Learning Prompts\nA prompt is composed of distinct modules.\nEach module can be optimized both on its own, and as a part of the entire system.\n\n1. The task type\n2. The task description\n3. A few examples\n4. Instructions for output format\n5. Custom Prompt Technique specific Instructions\n\n\nPrompt Learner is designed to enable assembly and optimzation of prompts."
+    "text": "Install\n1pip install prompt-learner\n\n1\n\nInstall prompt-learner\n\n\n\nRead Philosophy\n\n\n\n\n\n\nAssembling & Optimizing Prompts\nA prompt is composed of distinct modules.\nEach module can be optimized both on its own, and as a part of the entire system.\n\n1. The task type\n2. The task description\n3. A few examples\n4. Instructions for output format\n5. Custom Prompt Technique specific Instructions\n\n\nPrompt Learner is designed to enable assembly and optimzation of prompts.\nIt encourages rapid experimentation, easy maintainability and frictionless updating of prompts."
   },
   {
     "objectID": "index.html#quickstart",

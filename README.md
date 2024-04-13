@@ -5,15 +5,17 @@
 
 
 ## What is Prompt Learner?
-Prompt Learner is designed to assemble and optimze modular prompts.
-A prompt is composed of distinct modules where each module can be optimized both on its own, and as a part of the complete system. Some modules are -
+![A Modular Approach To Prompting](docs/concepts/images/anatomy.png)
+
+Prompt Learner is designed to make prompts modular.\
+This enables easy tuning, quick experimentation, and frictionless maintenance.\
+A prompt is composed of distinct modules where each module can be optimized & modified both on its own, and as a part of the complete system. Some modules are -
 
 1. The task type
 2. The task description
 3. A few examples
-4. Instructions for output format
-5. Custom Prompt Technique specific Instructions
-
+4. Custom Prompt Technique specific Instructions
+5. Instructions for output format
 
 
 See the documentation on ["Why Prompt Learner?"](https://promptlearner.attuna.xyz/why.html) to learn more.

@@ -1,6 +1,6 @@
 ---
 title: "Prompt Learner"
-description: "never write a prompt from scratch again"
+description: "modular prompting for systematic tuning and optimization"
 repo-actions: false
 code-annotations: hover
 twitter-card:
@@ -41,7 +41,7 @@ pip install prompt-learner # <1>
 
 ::: {#collapsePhilosphy .collapse .multi-collapse}
 
-### Assembling & Learning Prompts
+### Assembling & Optimizing Prompts
 
 A prompt is composed of distinct modules. \
 Each module can be optimized both on its own, and as a part of
@@ -55,6 +55,7 @@ the entire system. \
 \
 
 Prompt Learner is designed to enable *assembly and optimzation* of prompts.\
+It encourages rapid experimentation, easy maintainability and frictionless updating of prompts.
 
 :::
 
