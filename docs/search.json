@@ -11,7 +11,7 @@
     "href": "index.html#install",
     "title": "Prompt Learner",
     "section": "Install",
-    "text": "Install\n1pip install prompt-learner\n\n1\n\nInstall prompt-learner\n\n\n\nShow Philosophy\n\n\n\n\n\n\nAssembling & Learning Prompts\nA prompt is composed of distinct modules.\nEach module can be optimized both on its own, and as a part of the entire system.\n\n1. The task type\n2. The task description\n3. A few examples\n4. Instructions for output format\n5. Custom Prompt Technique specific Instructions\n\n\nPrompt Learner is designed to enable assembly and optimzation of prompts."
+    "text": "Install\n1pip install prompt-learner\n\n1\n\nInstall prompt-learner\n\n\n\nRead Philosophy\n\n\n\n\n\n\nAssembling & Learning Prompts\nA prompt is composed of distinct modules.\nEach module can be optimized both on its own, and as a part of the entire system.\n\n1. The task type\n2. The task description\n3. A few examples\n4. Instructions for output format\n5. Custom Prompt Technique specific Instructions\n\n\nPrompt Learner is designed to enable assembly and optimzation of prompts."
   },
   {
     "objectID": "index.html#quickstart",
@@ -183,5 +183,12 @@
     "crumbs": [
       "Why Prompt-Learner?"
     ]
+  },
+  {
+    "objectID": "tutorials/optimize_customer_text_classifier.html",
+    "href": "tutorials/optimize_customer_text_classifier.html",
+    "title": "Optimizing a Prompt",
+    "section": "",
+    "text": "Using Prompt-Learner\nWe will use prompt-learner to optimize the prompt for a customer support text classifier task.\n\nPrompt-learner for Classification Task\n\nDescribe your task\n\n\nclassification_description = \"You have to classify customer texts as Urgent or Not Urgent\"\n\n\nSpecify allowed labels\n\n\nclassification_labels = [\"Urgent\", \"Not Urgent\"]\n\n\nCreate the classification task\n\n\nfrom prompt_learner.tasks import classification\nclassification_task = classification.ClassificationTask(description=classification_description, allowed_labels=classification_labels)\n\n\nAdd a few examples to your task\n\n\nfrom prompt_learner.examples import Example\nclassification_task.add_example(Example(text=\"I need help\", label=\"Urgent\"))\nclassification_task.add_example(Example(text=\"I got my package\", label=\"Not Urgent\"))\n\n\nChoose an LLM Provider template\n\n\nfrom prompt_learner.templates import openai_template\nopenai_template = openai_template.OpenAICompletionTemplate(task=classification_task)\n\n\nRun any Optimizer to sample Examples for inserting in prompt\n\n\nfrom prompt_learner.optimizers.selectors import random_sampler\nsampler = random_sampler.RandomSampler(num_samples=1, task=classification_task)\nsampler.select_examples()\n\n\nAssemble the prompt with selected examples, and any prompting technique (example, Chain of Thought)\n\n\nfrom prompt_learner.prompts import cot\nopenai_prompt = cot.CoT(template=openai_template, selector=sampler)\nopenai_prompt.assemble_prompt()\n\n\nView your prompt!\n\n\nopenai_prompt.prompt\n\n\nEvaluate performance of your prompt.\n\n\nfrom prompt_learner.evals.metrics.accuracy import Accuracy\nacc_score = Accuracy(classification_task).compute(openai_prompt, OpenAI())\n# automatically runs evaluation on all examples that are not in the prompt\n\n\nInfer using your prompt\n\n\nfrom prompt_learner.adapters.openai import OpenAI\nopenai_prompt.add_inference(\"My package is missing\")\n\nanswer = classification_task.predict(OpenAI(), openai_prompt.prompt)"
   }
 ]

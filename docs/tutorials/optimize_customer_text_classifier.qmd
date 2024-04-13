@@ -1,6 +1,7 @@
 ---
 title: "Optimizing a Prompt"
 sidebar: Optimizing Prompt
+---
 # Using Prompt-Learner
 We will use prompt-learner to optimize the prompt for a customer support text classifier task.
 

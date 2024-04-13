@@ -35,7 +35,7 @@ pip install prompt-learner # <1>
 
 1. Install prompt-learner
 
-<div class="d-grid gap-2"><a class="btn btn-lg btn-primary" data-bs-toggle="collapse" href="#collapsePhilosphy" role="button" aria-expanded="false" aria-controls="collapsePhilosphy">Show Philosophy</a></div>
+<div class="d-grid gap-2"><a class="btn btn-lg btn-primary" data-bs-toggle="collapse" href="#collapsePhilosphy" role="button" aria-expanded="false" aria-controls="collapsePhilosphy">Read Philosophy</a></div>
 
 ###
 
