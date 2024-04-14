@@ -36,5 +36,6 @@ class AnthropicCompletionTemplate(Template):
         """Add prediction sample to task."""
         return f"""\n
         <text> {text} </text>\n
+        <label>
         """
         
