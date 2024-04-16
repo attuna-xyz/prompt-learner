@@ -18,7 +18,7 @@
     "href": "index.html#quickstart",
     "title": "Prompt Learner",
     "section": "Quickstart",
-    "text": "Quickstart\nSee the getting started tutorial for a more in-depth introduction to Prompt-learner. Below is a quick overview.\n\nEnsure you install prompt-learner first\nPick your task type\nDescribe the task\nAdd a few examples\nChoose an LLM adapter\nSelect some examples by running an optimizer\nGet the final prompt\nInfer on your new sample!"
+    "text": "Quickstart\n\n\n\n\nSee the getting started tutorial for a more in-depth introduction to Prompt-learner."
   },
   {
     "objectID": "getting-started.html",

@@ -22,12 +22,13 @@ See the documentation on ["Why Prompt Learner?"](https://promptlearner.attuna.xy
 
 ## Getting started
 
+[![Watch our quick start guide](https://cdn.loom.com/sessions/thumbnails/94f5345736d34af3b8b6b41e1be4c2a3-with-play.gif)](https://www.loom.com/share/94f5345736d34af3b8b6b41e1be4c2a3)
+
 You can `pip install` Prompt Learner: 
 
 ```bash
 pip install prompt-learner
 ```
-
 > [!TIP]
 > See the [getting started tutorial](https://promptlearner.attuna.xyz/getting-started.html) for a detailed example of Prompt Learner in action.
 

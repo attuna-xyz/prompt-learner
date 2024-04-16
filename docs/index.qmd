@@ -64,16 +64,9 @@ It encourages rapid experimentation, easy maintainability and frictionless updat
 
 ## Quickstart
 
-See [the getting started tutorial](tutorials/getting_started.qmd) for a more in-depth introduction to Prompt-learner. Below is a quick overview.
+<div style="position: relative; padding-bottom: 64.63195691202873%; height: 0;"><iframe src="https://www.loom.com/embed/94f5345736d34af3b8b6b41e1be4c2a3?sid=97519725-93cf-4ac3-a6b9-6cbe0b20e90a" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
-1. Ensure you install prompt-learner first
-2. Pick your task type
-3. Describe the task
-3. Add a few examples
-4. Choose an LLM adapter
-5. Select some examples by running an optimizer
-6. Get the final prompt
-7. Infer on your new sample!
+See [the getting started tutorial](tutorials/getting_started.qmd) for a more in-depth introduction to Prompt-learner. 
 
 
 
