@@ -19,6 +19,6 @@ class Prompt(BaseModel):
         self.prompt = f"""{self.template.descriptor}\n{self.template.examples_preamble}
         \n{self.template.format_examples(self.selector.selected_examples)}"""
 
-    def add_inference(self, text: str):
+    def add_inference(self, text: str, context: str = ""):
         """Add inference sample"""
-        self.prompt = self.prompt + self.template.add_prediction_sample(text)
+        self.prompt = self.prompt + self.template.add_prediction_sample(text,context)

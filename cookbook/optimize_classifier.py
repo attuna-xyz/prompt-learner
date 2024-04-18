@@ -11,7 +11,6 @@ from prompt_learner.optimizers.selectors.stratified_sampler import StratifiedSam
 from prompt_learner.optimizers.selectors.diverse_sampler import DiverseSampler
 from prompt_learner.prompts.cot import CoT
 from prompt_learner.prompts.prompt import Prompt #can call it base prompt
-from prompt_learner.evals.metrics.accuracy import Accuracy
 
 classification_description = "You have to classify customer texts as Urgent or Not Urgent"
 classification_labels = ["Urgent", "Not Urgent"]

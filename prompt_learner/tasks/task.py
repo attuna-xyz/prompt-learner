@@ -1,15 +1,15 @@
 """Generic Task class."""
 
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel, Field
 from prompt_learner.examples.example import Example
 from prompt_learner.adapters.adapter import Adapter
 
 
-class Task(BaseModel):
+class Task(BaseModel): #TO_DO enum for all task types
     """Defines the contract for a Generic task."""
     description: str = Field(description="The name of the task.")
-    allowed_labels: List[str] = Field(description="Allowed labels for task.")
+    allowed_labels: List[str] = Field(description="Allowed labels for task.", default=[])
     examples: List[Example] = []
     selected_examples: List[Example] = []
     test_examples: List[Example] = []

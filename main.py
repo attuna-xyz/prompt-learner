@@ -5,6 +5,7 @@ from prompt_learner.templates.openai_template import OpenAICompletionTemplate
 from prompt_learner.templates.anthropic_template import AnthropicCompletionTemplate
 
 from prompt_learner.tasks.classification import ClassificationTask
+from prompt_learner.tasks.sql_generation import SQLGenerationTask
 from prompt_learner.tasks.tagging import TaggingTask
 
 from prompt_learner.examples.example import Example
@@ -51,26 +52,44 @@ from prompt_learner.evals.metrics.accuracy import Accuracy
 # print("ANSWER:", answer)
 # print("Valid output>", classification_task.validate_prediction("A cat", answer))
 
-classification_description = "You have to classify customer texts as Urgent or Not Urgent"
-classification_labels = ["Urgent", "Not Urgent"]
-classification_task = ClassificationTask(description=classification_description, allowed_labels=classification_labels)
-classification_task.add_example(Example(text="I need help", label="Urgent"))
-classification_task.add_example(Example(text="I got my package", label="Not Urgent"))
-classification_task.add_example(Example(text="I lost my package", label="Urgent"))
-classification_task.add_example(Example(text="I could not find my package", label="Urgent"))
-classification_task.add_example(Example(text="Customer service was great!", label="Not Urgent"))
-classification_task.add_example(Example(text="Amazing customer support!", label="Not Urgent"))
-print(classification_task.examples)
-task = classification_task
-openai_template = OpenAICompletionTemplate(task=classification_task)
-sampler = DiverseSampler(num_samples=3, task=classification_task)
+sql_description = "You have to generate SQL query for the given text to run on sqlite"
+
+sql_task = SQLGenerationTask(description=sql_description)
+schema = """CREATE TABLE singer (
+ singer_id NUMERIC PRIMARY KEY,
+    name TEXT,
+    country TEXT,
+    song_name TEXT,
+    song_release_year TEXT,
+    age NUMERIC,
+    is_male TIMESTAMP
+);
+"""
+sql_task.add_example(Example(text="How many singers do we have?", context=schema, label="SELECT COUNT(singer_id) FROM singer;"))
+sql_task.add_example(Example(text="What is the average, minimum, and maximum age for all French singers?", context=schema, label="SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country='France';"))
+
+print(sql_task.examples)
+task = sql_task
+openai_template = OpenAICompletionTemplate(task=sql_task)
+sampler = RandomSampler(num_samples=1, task=sql_task)
 sampler.select_examples()
 openai_prompt = CoT(template=openai_template, selector=sampler)
 openai_prompt.assemble_prompt()
 print(openai_prompt.prompt)
-print("Evals,")
-acc, num_total_samplers = Accuracy(classification_task).compute(openai_prompt, OpenAI())
-print("got an accuracy of ", acc, " with ", num_total_samplers, " eval samples")
+openai_prompt.add_inference("Show number of singers in France", schema)
+print(openai_prompt.prompt)
+print(task.predict(OpenAI(), openai_prompt.prompt))
+
+anthropic_template = AnthropicCompletionTemplate(task=sql_task)
+anthropic_prompt = CoT(template=anthropic_template, selector=sampler)
+anthropic_prompt.assemble_prompt()
+print(anthropic_prompt.prompt)
+anthropic_prompt.add_inference("Show number of singers in France", schema)
+print(anthropic_prompt.prompt)
+print(task.predict(Anthropic(), anthropic_prompt.prompt))
+#print("Evals,")
+#acc, num_total_samplers = Accuracy(task).compute(openai_prompt, OpenAI())
+#print("got an accuracy of ", acc, " with ", num_total_samplers, " eval samples")
 # openai_prompt.add_inference("My package is missing")
 # print(openai_prompt.prompt)
 # answer = classification_task.predict(OpenAI(), openai_prompt.prompt)

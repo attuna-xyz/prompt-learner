@@ -8,34 +8,60 @@ class AnthropicCompletionTemplate(Template):
     """This class generates a template for Anthropic completions"""
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        tasks_with_labels = ["Classification", "Tagging"]
         self.descriptor = f"""You are a helpful AI assistant.
         You are helping a user with a {self.task_type} task.
         You have to perform the following task.
-        <task_description>{self.task_description}</task_description>
-        You have to select from the following labels.
+        <task_description>{self.task_description}</task_description>"""
+        if self.allowed_labels:
+            self.descriptor += """You have to select from the following labels.
         <allowed_labels>{self.allowed_labels}</allowed_labels>"""
-        self.prediction_preamble = f"""Given the text, you have
+        if self.task_type in tasks_with_labels:
+            self.prediction_preamble = f"""Given the text, you have
         to now predict the labels from
         list of allowed labels - {self.allowed_labels}
         Output only the label(s) and close the <label> tag."""
+        elif self.task_type == "SQLGeneration":
+            self.prediction_preamble = """Given the text, you have
+        to now generate a SQL query. Only the SQL query is expected."""
+        else:  #generic preamble for prediction
+            self.prediction_preamble = """Given the text, you have to now predict."""
         self.examples_preamble = """ Here are a few examples to
         help you understand the task better."""
     
     def format_examples(self, examples: List[Example]):
         """Formats the task examples into a string."""
+        tasks_with_labels = ["Classification", "Tagging"]
         examples_str = ""
         for example in examples:
-            examples_str += f"""
-            <example>
-            <text> {example.text}</text>\n
-            <label> {example.label}</label>\n
-            </example>"""
+            if self.task_type in tasks_with_labels:
+                examples_str += f"""
+                <example>
+                <text> {example.text}</text>\n
+                <label> {example.label}</label>\n
+                </example>"""
+            elif self.task_type == "SQLGeneration":
+                examples_str += f"""
+                <example>
+                <schema> {example.context}</schema>\n
+                <text> {example.text}</text>\n
+                <SQL> {example.label}</SQL>\n
+                </example>"""
+            else:
+                examples_str += f"""
+                <example>
+                <text> {example.text}</text>\n
+                <output> {example.label}</output>\n
+                </example>"""
         return examples_str
     
-    def add_prediction_sample(self, text: str):
+    def add_prediction_sample(self, text: str, context: str):
         """Add prediction sample to task."""
-        return f"""\n
-        <text> {text} </text>\n
-        <label>
-        """
-        
+        tasks_with_labels = ["Classification", "Tagging"]
+        prediction_preamble = self.prediction_preamble + f"""\n <text> {text} <text>"""
+        if self.task_type in tasks_with_labels:
+            return prediction_preamble + "<label>"
+        elif self.task_type == "SQLGeneration":
+            return prediction_preamble + f"""\n <schema>{context} <\schema>\m <SQL>"""
+        else:
+            return prediction_preamble + "<output>"
