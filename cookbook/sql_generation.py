@@ -10,7 +10,7 @@ from prompt_learner.examples.example import Example
 from prompt_learner.optimizers.selectors.random_sampler import RandomSampler
 from prompt_learner.prompts.cot import CoT
 
-sql_description = "Please generate SQL query for the given texts to run on sqlite. I will use your output directly in sqlite."
+sql_description = "Please generate SQL query for the given texts to run on sqlite. I will use your output directly in sqlite so only give me the final executable SQL."
 sql_task = SQLGenerationTask(description=sql_description)
 schema = """CREATE TABLE singer (
  singer_id NUMERIC PRIMARY KEY,
