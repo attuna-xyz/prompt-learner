@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "prompt-learner"
-version = "0.1.7"
+version = "0.1.8"
 description = ""
 authors = ["Aditya Lahiri <adityalahiri13@gmail.com>"]
 readme = "README.md"
