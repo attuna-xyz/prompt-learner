@@ -13,6 +13,7 @@ langchain-anthropic = "^0.1.4"
 black = "^24.3.0"
 python-dotenv = "^1.0.1"
 scikit-learn = "^1.4.2"
+langchain-fireworks = "^0.1.2"
 
 
 [build-system]
