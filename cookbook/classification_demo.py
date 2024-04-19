@@ -4,6 +4,7 @@ from prompt_learner.prompts.prompt import Prompt
 from prompt_learner.prompts.cot import CoT
 from prompt_learner.templates.openai_template import OpenAICompletionTemplate
 from prompt_learner.adapters.openai import OpenAI
+from prompt_learner.adapters.llama  import Llama
 from prompt_learner.optimizers.selectors.random_sampler import RandomSampler
 from prompt_learner.optimizers.selectors.diverse_sampler import DiverseSampler
 from prompt_learner.evals.metrics.accuracy import Accuracy
@@ -39,7 +40,7 @@ with open("data/support_texts_test.csv") as f:
 
 
 
-acc, num_total_samplers = Accuracy(classification_task).compute(openai_prompt, OpenAI(),test=True)
+acc, num_total_samplers = Accuracy(classification_task).compute(openai_prompt, Llama(),test=True)
 print("got a test accuracy of ", acc, " with ", num_total_samplers, " eval samples")
 
 
@@ -55,7 +56,7 @@ openai_prompt.assemble_prompt()
 
 print(openai_prompt.prompt)
 
-acc, num_total_samplers = Accuracy(classification_task).compute(openai_prompt, OpenAI(),test=True)
+acc, num_total_samplers = Accuracy(classification_task).compute(openai_prompt, Llama(),test=True)
 print("got a test accuracy of ", acc, " with ", num_total_samplers, " eval samples")
 
 

@@ -1,5 +1,6 @@
 from prompt_learner.adapters.openai import OpenAI
 from prompt_learner.adapters.anthropic import Anthropic
+from prompt_learner.adapters.llama import Llama
 from prompt_learner.templates.openai_template import OpenAICompletionTemplate
 from prompt_learner.templates.anthropic_template import AnthropicCompletionTemplate
 from prompt_learner.tasks.sql_generation import SQLGenerationTask
@@ -35,7 +36,7 @@ openai_prompt.assemble_prompt()
 openai_prompt.add_inference("Show number of singers in France", schema)
 print(openai_prompt.prompt)
 print(task.predict(OpenAI(), openai_prompt.prompt))
-
+print(task.predict(Llama(), openai_prompt.prompt))
 #using anthropic
 anthropic_template = AnthropicCompletionTemplate(task=sql_task)
 anthropic_prompt = CoT(template=anthropic_template, selector=sampler)
