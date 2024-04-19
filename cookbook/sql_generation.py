@@ -11,7 +11,7 @@ from prompt_learner.examples.example import Example
 from prompt_learner.optimizers.selectors.random_sampler import RandomSampler
 from prompt_learner.prompts.cot import CoT
 
-sql_description = "Please generate SQL query for the given texts to run on sqlite. I will use your output directly in sqlite so only give me the final executable SQL."
+sql_description = "Please generate SQL query for the given texts to run on sqlite. I will use your output directly in sqlite so only give me the final executable SQL. Do not wrap it in backticks or quotes."
 sql_task = SQLGenerationTask(description=sql_description)
 schema = """CREATE TABLE singer (
  singer_id NUMERIC PRIMARY KEY,
@@ -35,7 +35,7 @@ openai_prompt = CoT(template=openai_template, selector=sampler)
 openai_prompt.assemble_prompt()
 openai_prompt.add_inference("Show number of singers in France", schema)
 print(openai_prompt.prompt)
-print(task.predict(OpenAI(), openai_prompt.prompt))
+print(task.predict(OpenAI(model_name='gpt-4-turbo'), openai_prompt.prompt))
 print(task.predict(Llama(), openai_prompt.prompt))
 #using anthropic
 anthropic_template = AnthropicCompletionTemplate(task=sql_task)
