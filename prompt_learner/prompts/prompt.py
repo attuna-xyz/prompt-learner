@@ -22,3 +22,8 @@ class Prompt(BaseModel):
     def add_inference(self, text: str, context: str = ""):
         """Add inference sample"""
         self.prompt = self.prompt + self.template.add_prediction_sample(text,context)
+    
+    def translate(self, template: Template):
+        """Translate the prompt to the new template."""
+        self.template = template(task=self.template.task)
+        self.assemble_prompt()
