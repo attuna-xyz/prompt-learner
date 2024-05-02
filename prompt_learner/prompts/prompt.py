@@ -8,7 +8,6 @@ from prompt_learner.templates.template import Template
 class Prompt(BaseModel):
     """Defines the contract for a Generic Prompt."""
     template: Template
-    selector: Selector = Field(description="Selector for the task.")
     prompt: str = Field(description="Final prompt string.", default="")
 
     def select_examples(self):
@@ -17,7 +16,7 @@ class Prompt(BaseModel):
     def assemble_prompt(self):
         """Assemble the prompt."""
         self.prompt = f"""{self.template.descriptor}{self.template.examples_preamble}
-        {self.template.format_examples(self.selector.selected_examples)}"""
+        {self.template.format_examples(self.template.task.selected_examples)}"""
 
     def add_inference(self, text: str, context: str = ""):
         """Add inference sample"""

@@ -48,7 +48,7 @@ sampler.select_examples()
 ```{python}
 #| eval: false
 from prompt_learner.prompts import cot
-openai_prompt = cot.CoT(template=openai_template, selector=sampler)
+openai_prompt = cot.CoT(template=openai_template)
 openai_prompt.assemble_prompt()
 ```
 8. View your prompt!

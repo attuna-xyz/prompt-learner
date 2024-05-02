@@ -23,7 +23,7 @@ classification_task.add_example(Example(text="Could you guide me to the recent c
 sampler = RandomSampler(num_samples=2, task=classification_task)
 sampler.select_examples()
 
-openai_prompt = CoT(template=template, selector=sampler)
+openai_prompt = CoT(template=template)
 openai_prompt.assemble_prompt()
 print(openai_prompt.prompt)
 

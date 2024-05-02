@@ -11,4 +11,4 @@ class CoT(Prompt):
     
     def assemble_prompt(self):
         """Assemble the prompt."""
-        self.prompt = f"""{self.template.descriptor}{self.template.examples_preamble}{self.template.format_examples(self.selector.selected_examples)}{self.custom_intructions}"""
+        self.prompt = f"""{self.template.descriptor}{self.template.examples_preamble}{self.template.format_examples(self.template.task.selected_examples)}{self.custom_intructions}"""

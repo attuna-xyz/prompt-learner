@@ -22,7 +22,7 @@ classification_task.add_example(Example(text="Could you guide me to the recent c
 sampler = RandomSampler(num_samples=2, task=classification_task)
 sampler.select_examples()
 
-claude_prompt = CoT(template=template, selector=sampler)
+claude_prompt = CoT(template=template)
 claude_prompt.assemble_prompt()
 
 
@@ -49,7 +49,7 @@ classification_task.add_example(Example(text="Could you please update me on the 
 sampler = DiverseSampler(num_samples=3, task=classification_task)
 sampler.select_examples()
 
-claude_prompt = CoT(template=template, selector=sampler)
+claude_prompt = CoT(template=template)
 claude_prompt.assemble_prompt()
 
 print(claude_prompt.prompt)
