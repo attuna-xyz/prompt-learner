@@ -39,8 +39,8 @@ classification_task = ClassificationTask(description=classification_description,
 
 **Narrator (Voice Over):** Every single Language Model was trained in a very specific way and responds differently to different formatting patterns. For example, Anthropic recommends using xml tags when using Claude. However, xml tags can even be useful in OpenAI's GPT set of models even though they are not strictly recommended because they help in giving clarity to different sections. You can mix and match these templates using prompt learner that ensures recommended formatting.  Lets use the Open AI template for now. 
 
-from prompt_learner.templates.openai_template import OpenAICompletionTemplate
-template = OpenAICompletionTemplate(task=classification_task)
+from prompt_learner.templates.gpt_template import GPTTemplate
+template = GPTTemplate(task=classification_task)
 
 **Narrator (Voice Over):** "That completes the task overview.
  Examples are the backbone of any classification task. Prompt-Learner allows you to integrate examples seamlessly to train your model more effectively. 
@@ -59,13 +59,13 @@ selector= RandomSampler(num_samples=1, task=classification_task).select_examples
 
 
 **Narrator (Voice Over):** "Custom instructions is another very important area of a prompt. You can implement standardized prompting techniques like chain of thought prompting by adding  'think step by step,'  as a custom instruction or - any of the up and coming sophisticated prompt instruction techniques. All of this contributes to enhancing your prompt's performance."
-openai_prompt = CoT(template=template, selector=selector )
+gpt_prompt = CoT(template=template, selector=selector )
 **[Highlight 'Custom Instructions' on Image]**
 
 **Narrator (Voice Over):**  Now is a good time to assemble the prompt by combining all the modules we have defined till now.  We have a well formed prompt designed from first principle. We can swap in and swap out any of the intermediate modules and re-assemble the prompt. We are no longer working with a monolithic blob of string.
 
-openai_prompt.assemble_prompt()
-openai_prompt.prompt
+gpt_prompt.assemble_prompt()
+gpt_prompt.prompt
 
 **Narrator (Voice Over):** Prompt learner has in built validations that can run your assembled prompt against held out data or a custom test dataset. This enables rapid feedback. By changing modules, and re-running evals you can quickly iterate on your prompts. Lets evaluate our current prompt for accuraacy on a few test samples
 
@@ -81,8 +81,8 @@ Rapid iteration and experimentation by changing modules of a prompt - thats what
 
 **Narrator (Voice Over):** "You can also choose an LLM provider and run inference using this assmebled and optimized prompt. Given an inference sample, Prompt-Learner will predict the label based on your meticulously crafted prompt."
 
-openai_prompt.add_inference("My package is missing")
-answer = classification_task.predict(OpenAI(), openai_prompt.prompt)
+gpt_prompt.add_inference("My package is missing")
+answer = classification_task.predict(OpenAI(), gpt_prompt.prompt)
 print(answer)
 **[Highlight the Prediction Module on Image]**
 

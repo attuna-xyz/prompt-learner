@@ -1,10 +1,10 @@
-"""This module contains the AnthropicCompletionTemplate class"""
+"""This module contains the ClaudeTemplate class"""
 from typing import List
 from prompt_learner.examples.example import Example
 from .template import Template
 
 
-class AnthropicCompletionTemplate(Template):
+class ClaudeTemplate(Template):
     """This class generates a template for Anthropic completions"""
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

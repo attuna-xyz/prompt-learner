@@ -217,26 +217,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Describe your task</li>
 </ol>
-<div id="3ebb5d56" class="cell" data-execution_count="1">
+<div id="47d0cc58" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>classification_description <span class="op">=</span> <span class="st">"You have to classify customer texts as Urgent or Not Urgent"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
 <li>Specify allowed labels</li>
 </ol>
-<div id="98823a6c" class="cell" data-execution_count="2">
+<div id="7373b862" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>classification_labels <span class="op">=</span> [<span class="st">"Urgent"</span>, <span class="st">"Not Urgent"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="3" type="1">
 <li>Create the classification task</li>
 </ol>
-<div id="47bfe9ff" class="cell" data-execution_count="3">
+<div id="3d6f71e2" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.tasks <span class="im">import</span> classification</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>classification_task <span class="op">=</span> classification.ClassificationTask(description<span class="op">=</span>classification_description, allowed_labels<span class="op">=</span>classification_labels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
 <li>Add a few examples to your task</li>
 </ol>
-<div id="9aaea9b9" class="cell" data-execution_count="4">
+<div id="bb9df551" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.examples <span class="im">import</span> Example</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>classification_task.add_example(Example(text<span class="op">=</span><span class="st">"I need help"</span>, label<span class="op">=</span><span class="st">"Urgent"</span>))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>classification_task.add_example(Example(text<span class="op">=</span><span class="st">"I got my package"</span>, label<span class="op">=</span><span class="st">"Not Urgent"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -244,14 +244,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="5" type="1">
 <li>Choose an LLM Provider template</li>
 </ol>
-<div id="28ef31b9" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.templates <span class="im">import</span> openai_template</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>openai_template <span class="op">=</span> openai_template.OpenAICompletionTemplate(task<span class="op">=</span>classification_task)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="33c46dde" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.templates <span class="im">import</span> gpt_template</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>gpt_template <span class="op">=</span> gpt_template.GPTTemplate(task<span class="op">=</span>classification_task)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="6" type="1">
 <li>Run any Optimizer to sample Examples for inserting in prompt</li>
 </ol>
-<div id="cc9d563a" class="cell" data-execution_count="6">
+<div id="b6b37e7e" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.optimizers.selectors <span class="im">import</span> random_sampler</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> random_sampler.RandomSampler(num_samples<span class="op">=</span><span class="dv">1</span>, task<span class="op">=</span>classification_task)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sampler.select_examples()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -259,33 +259,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="7" type="1">
 <li>Assemble the prompt with selected examples, and any prompting technique (example, Chain of Thought)</li>
 </ol>
-<div id="91f7a5e2" class="cell" data-execution_count="7">
+<div id="28809e8b" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.prompts <span class="im">import</span> cot</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>openai_prompt <span class="op">=</span> cot.CoT(template<span class="op">=</span>openai_template)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>openai_prompt.assemble_prompt()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>gpt_prompt <span class="op">=</span> cot.CoT(template<span class="op">=</span>gpt_template)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>gpt_prompt.assemble_prompt()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="8" type="1">
 <li>View your prompt!</li>
 </ol>
-<div id="0707bcf7" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>openai_prompt.prompt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b3f399e2" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gpt_prompt.prompt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="9" type="1">
 <li>Evaluate performance of your prompt.</li>
 </ol>
-<div id="62ca6c8b" class="cell" data-execution_count="9">
+<div id="f6bedebc" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.evals.metrics.accuracy <span class="im">import</span> Accuracy</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>acc_score <span class="op">=</span> Accuracy(classification_task).compute(openai_prompt, OpenAI())</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>acc_score <span class="op">=</span> Accuracy(classification_task).compute(gpt_prompt, OpenAI())</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># automatically runs evaluation on all examples that are not in the prompt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="10" type="1">
 <li>Infer using your prompt</li>
 </ol>
-<div id="266ed629" class="cell" data-execution_count="10">
+<div id="4e04601a" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.adapters.openai <span class="im">import</span> OpenAI</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>openai_prompt.add_inference(<span class="st">"My package is missing"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gpt_prompt.add_inference(<span class="st">"My package is missing"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>answer <span class="op">=</span> classification_task.predict(OpenAI(), openai_prompt.prompt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>answer <span class="op">=</span> classification_task.predict(OpenAI(), gpt_prompt.prompt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

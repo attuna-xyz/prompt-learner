@@ -1,6 +1,6 @@
 from prompt_learner.adapters.openai import OpenAI
 
-from prompt_learner.templates.openai_template import OpenAICompletionTemplate
+from prompt_learner.templates.gpt_template import GPTTemplate
 
 from prompt_learner.tasks.classification import ClassificationTask
 
@@ -31,42 +31,42 @@ with open("data/support_texts_test.csv") as f:
         classification_task.add_example(Example(text=text.strip(), label=label.strip()), test=True)
 
 task = classification_task
-openai_template = OpenAICompletionTemplate(task=classification_task)
+gpt_template = GPTTemplate(task=classification_task)
 sampler = StratifiedSampler(num_samples=2, task=classification_task)
 sampler.select_examples()
-openai_prompt = CoT(template=openai_template)
-openai_prompt.assemble_prompt()
-print(openai_prompt.prompt)
+gpt_prompt = CoT(template=gpt_template)
+gpt_prompt.assemble_prompt()
+print(gpt_prompt.prompt)
 print("Evals,")
-acc, num_total_samplers = Accuracy(classification_task).compute(openai_prompt, OpenAI())
+acc, num_total_samplers = Accuracy(classification_task).compute(gpt_prompt, OpenAI())
 print("got a val accuracy of ", acc, " with ", num_total_samplers, " eval samples")
-acc, num_total_samplers = Accuracy(classification_task).compute(openai_prompt, OpenAI(),test=True)
+acc, num_total_samplers = Accuracy(classification_task).compute(gpt_prompt, OpenAI(),test=True)
 print("got a test accuracy of ", acc, " with ", num_total_samplers, " eval samples")
 sampler = DiverseSampler(num_samples=4, task=classification_task)
 sampler.select_examples()
-openai_prompt = CoT(template=openai_template)
-openai_prompt.assemble_prompt()
-print(openai_prompt.prompt)
+gpt_prompt = CoT(template=gpt_template)
+gpt_prompt.assemble_prompt()
+print(gpt_prompt.prompt)
 print("Evals,")
-acc, num_total_samplers = Accuracy(classification_task).compute(openai_prompt, OpenAI())
+acc, num_total_samplers = Accuracy(classification_task).compute(gpt_prompt, OpenAI())
 print("got a val accuracy of ", acc, " with ", num_total_samplers, " eval samples")
-acc, num_total_samplers = Accuracy(classification_task).compute(openai_prompt, OpenAI(),test=True)
+acc, num_total_samplers = Accuracy(classification_task).compute(gpt_prompt, OpenAI(),test=True)
 print("got a test accuracy of ", acc, " with ", num_total_samplers, " eval samples")
-# openai_prompt.add_inference("My package is missing")
-# print(openai_prompt.prompt)
-# answer = classification_task.predict(OpenAI(), openai_prompt.prompt)
+# gpt_prompt.add_inference("My package is missing")
+# print(gpt_prompt.prompt)
+# answer = classification_task.predict(OpenAI(), gpt_prompt.prompt)
 # print("ANSWER:", answer)
 
 #--
 
-# anthropic_template = AnthropicCompletionTemplate(classification_task,sampler)
+# claude_template = ClaudeTemplate(classification_task,sampler)
 
-# print(anthropic_template.prompt)
-# final_prompt = openai_template.add_prediction_sample("My package is missing")
+# print(claude_template.prompt)
+# final_prompt = gpt_template.add_prediction_sample("My package is missing")
 # answer = classification_task.predict(OpenAI(), final_prompt)
 # print("ANSWER:", answer)
 # print("Valid output>", classification_task.validate_prediction("My package is missing", answer))
-# final_prompt = anthropic_template.add_prediction_sample("My package is missing")
+# final_prompt = claude_template.add_prediction_sample("My package is missing")
 # answer = classification_task.predict(Anthropic(), final_prompt)
 # print("ANSWER:", answer)
 # print("Valid output>", classification_task.validate_prediction("My package is missing", answer))

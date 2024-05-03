@@ -1,5 +1,5 @@
 from prompt_learner.adapters.openai import OpenAI
-from prompt_learner.templates.openai_template import OpenAICompletionTemplate
+from prompt_learner.templates.gpt_template import GPTTemplate
 
 from prompt_learner.tasks.sql_generation import SQLGenerationTask
 from prompt_learner.examples.example import Example
@@ -37,12 +37,12 @@ def execute(inputs, parameters):
         )
     )
     task = sql_task
-    openai_template = OpenAICompletionTemplate(task=sql_task)
+    gpt_template = GPTTemplate(task=sql_task)
     sampler = RandomSampler(num_samples=1, task=sql_task)
     sampler.select_examples()
-    openai_prompt = CoT(template=openai_template, selector=sampler)
-    openai_prompt.assemble_prompt()
+    gpt_prompt = CoT(template=gpt_template, selector=sampler)
+    gpt_prompt.assemble_prompt()
 
     # Run the prompt
-    openai_prompt.add_inference(inputs["question"], inputs["schema"])
-    return {"value": task.predict(OpenAI(), openai_prompt.prompt)}
+    gpt_prompt.add_inference(inputs["question"], inputs["schema"])
+    return {"value": task.predict(OpenAI(), gpt_prompt.prompt)}

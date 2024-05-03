@@ -1,8 +1,8 @@
 from prompt_learner.adapters.openai import OpenAI
 from prompt_learner.adapters.anthropic import Anthropic
 from prompt_learner.adapters.llama import Llama
-from prompt_learner.templates.openai_template import OpenAICompletionTemplate
-from prompt_learner.templates.anthropic_template import AnthropicCompletionTemplate
+from prompt_learner.templates.gpt_template import GPTTemplate
+from prompt_learner.templates.claude_template import ClaudeTemplate
 from prompt_learner.tasks.sql_generation import SQLGenerationTask
 
 
@@ -28,19 +28,19 @@ sql_task.add_example(Example(text="What is the average, minimum, and maximum age
 
 
 task = sql_task
-openai_template = OpenAICompletionTemplate(task=sql_task)
+gpt_template = GPTTemplate(task=sql_task)
 sampler = RandomSampler(num_samples=1, task=sql_task)
 sampler.select_examples()
-openai_prompt = CoT(template=openai_template, selector=sampler)
-openai_prompt.assemble_prompt()
-openai_prompt.add_inference("Show number of singers in France", schema)
-print(openai_prompt.prompt)
-print(task.predict(OpenAI(model_name='gpt-4-turbo'), openai_prompt.prompt))
-print(task.predict(Llama(), openai_prompt.prompt))
+gpt_prompt = CoT(template=gpt_template, selector=sampler)
+gpt_prompt.assemble_prompt()
+gpt_prompt.add_inference("Show number of singers in France", schema)
+print(gpt_prompt.prompt)
+print(task.predict(OpenAI(model_name='gpt-4-turbo'), gpt_prompt.prompt))
+print(task.predict(Llama(), gpt_prompt.prompt))
 #using anthropic
-anthropic_template = AnthropicCompletionTemplate(task=sql_task)
-anthropic_prompt = CoT(template=anthropic_template, selector=sampler)
-anthropic_prompt.assemble_prompt()
-anthropic_prompt.add_inference("Show number of singers in France", schema)
-print(anthropic_prompt.prompt)
-print(task.predict(Anthropic(), anthropic_prompt.prompt))
+claude_template = ClaudeTemplate(task=sql_task)
+claude_prompt = CoT(template=claude_template, selector=sampler)
+claude_prompt.assemble_prompt()
+claude_prompt.add_inference("Show number of singers in France", schema)
+print(claude_prompt.prompt)
+print(task.predict(Anthropic(), claude_prompt.prompt))

@@ -1,10 +1,10 @@
-"""This module contains the OpenAICompletionTemplate class"""
+"""This module contains the GPTTemplate class"""
 from typing import List
 from prompt_learner.examples.example import Example
 from .template import Template
 
 
-class OpenAICompletionTemplate(Template):
+class GPTTemplate(Template):
     """This class generates a template for OpenAI completions"""
     
     def __init__(self, **kwargs):

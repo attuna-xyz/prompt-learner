@@ -33,8 +33,8 @@ classification_task.add_example(Example(text="I got my package", label="Not Urge
 5. Choose an LLM Provider template
 ```{python}
 #| eval: false
-from prompt_learner.templates import openai_template
-openai_template = openai_template.OpenAICompletionTemplate(task=classification_task)
+from prompt_learner.templates import gpt_template
+gpt_template = gpt_template.GPTTemplate(task=classification_task)
 ```
 6. Run any Optimizer to sample Examples for inserting in prompt
 ```{python}
@@ -48,26 +48,26 @@ sampler.select_examples()
 ```{python}
 #| eval: false
 from prompt_learner.prompts import cot
-openai_prompt = cot.CoT(template=openai_template)
-openai_prompt.assemble_prompt()
+gpt_prompt = cot.CoT(template=gpt_template)
+gpt_prompt.assemble_prompt()
 ```
 8. View your prompt!
 ```{python}
 #| eval: false
-openai_prompt.prompt
+gpt_prompt.prompt
 ```
 9. Evaluate performance of your prompt.
 ```{python}
 #| eval: false
 from prompt_learner.evals.metrics.accuracy import Accuracy
-acc_score = Accuracy(classification_task).compute(openai_prompt, OpenAI())
+acc_score = Accuracy(classification_task).compute(gpt_prompt, OpenAI())
 # automatically runs evaluation on all examples that are not in the prompt
 ```
 10. Infer using your prompt
 ```{python}
 #| eval: false
 from prompt_learner.adapters.openai import OpenAI
-openai_prompt.add_inference("My package is missing")
+gpt_prompt.add_inference("My package is missing")
 
-answer = classification_task.predict(OpenAI(), openai_prompt.prompt)
+answer = classification_task.predict(OpenAI(), gpt_prompt.prompt)
 ```

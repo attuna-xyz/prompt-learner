@@ -2,7 +2,7 @@ from prompt_learner.tasks.classification import ClassificationTask
 from prompt_learner.examples.example import Example
 from prompt_learner.prompts.prompt import Prompt
 from prompt_learner.prompts.cot import CoT
-from prompt_learner.templates.anthropic_template import AnthropicCompletionTemplate
+from prompt_learner.templates.anthropic_template import ClaudeTemplate
 from prompt_learner.adapters.anthropic import Anthropic
 from prompt_learner.optimizers.selectors.random_sampler import RandomSampler
 from prompt_learner.optimizers.selectors.diverse_sampler import DiverseSampler
@@ -12,7 +12,7 @@ task_description = "You have to classify customer texts as Urgent or Not Urgent"
 allowed_labels = ["Urgent", "Not Urgent"]
 classification_task = ClassificationTask(description=task_description, allowed_labels=allowed_labels)
 
-template = AnthropicCompletionTemplate(task=classification_task)
+template = ClaudeTemplate(task=classification_task)
 
 classification_task.add_example(Example(text="Could you provide me with more information about your refund policy?", label="Not Urgent"))
 classification_task.add_example(Example(text="My service is down and I am losing sales because of this!", label="Urgent"))

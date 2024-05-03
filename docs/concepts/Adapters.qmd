@@ -9,5 +9,5 @@ from prompt_learner.adapters.openai import OpenAI
 Running any inference requires an adapter as a paramter. The inference call is made through the specified LLM adapter.
 ```{python}
 #| eval: false
-classification_task.predict(OpenAI(), openai_prompt.prompt)
+classification_task.predict(OpenAI(), gpt_prompt.prompt)
 ```
