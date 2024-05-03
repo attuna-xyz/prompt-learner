@@ -43,8 +43,13 @@ class Translate(BaseModel):
         
         llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0)
         llm_with_tools = llm.with_structured_output(GetModules,method="json_mode")
-        task_message = "You are a a helpful AI Assistant. You have to take this next input prompt and extract the task description, allowed labels and examples from it. Give the result in a json. Here is the input prompt: "
+        task_message = """You are a a helpful AI Assistant. You have to take an input prompt and extract the task description, allowed labels and examples from it.
+        For the Example class, it should have a 'text' attribute which is the input text and a 'label' attribute which is the classification as the 2 fields.
+        Please rename the original input and output fields for each Example to 'text' and 'label' respectively.
+        Give the result in a json with exactly three keys - task_description, allowed_labels and examples.
+        Here is the input prompt: """
         ai_msg = llm_with_tools.invoke(task_message+self.input_prompt)
+        print(ai_msg)
         extracted_modules = GetModules(**ai_msg)
         return extracted_modules
         
