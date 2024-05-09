@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "prompt-learner"
-version = "0.2.0"
+version = "0.2.1"
 description = ""
 authors = ["Aditya Lahiri <adityalahiri13@gmail.com>"]
 readme = "README.md"
@@ -14,6 +14,7 @@ black = "^24.3.0"
 python-dotenv = "^1.0.1"
 scikit-learn = "^1.4.2"
 langchain-fireworks = "^0.1.2"
+langchain-groq = "^0.1.3"
 
 
 [build-system]
