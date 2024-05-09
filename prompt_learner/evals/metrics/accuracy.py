@@ -13,6 +13,7 @@ class Accuracy:
         """Compute the accuracy of the model."""
         correct = 0
         total = 0
+        results = []
         if test is False:
             examples = self.task.examples
         else:
@@ -27,6 +28,5 @@ class Accuracy:
                 prediction = prediction.strip('\n')
                 if example.label == prediction:
                     correct += 1
-                else:
-                    print("Incorrect prediction:", example.text, example.label,prediction)
-        return (correct / total, total)
+                results.append((example.text, example.label, prediction))
+        return (correct / total,results)

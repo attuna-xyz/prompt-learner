@@ -40,8 +40,9 @@ with open("data/support_texts_test.csv") as f:
 
 
 
-acc, num_total_samplers = Accuracy(classification_task).compute(gpt_prompt, Llama(),test=True)
-print("got a test accuracy of ", acc, " with ", num_total_samplers, " eval samples")
+acc, results = Accuracy(classification_task).compute(gpt_prompt, Llama(),test=True)
+print(results)
+print("got a test accuracy of ", acc, " with ", len(results), " eval samples")
 
 
 
@@ -56,8 +57,8 @@ gpt_prompt.assemble_prompt()
 
 print(gpt_prompt.prompt)
 
-acc, num_total_samplers = Accuracy(classification_task).compute(gpt_prompt, Llama(),test=True)
-print("got a test accuracy of ", acc, " with ", num_total_samplers, " eval samples")
+acc,results = Accuracy(classification_task).compute(gpt_prompt, Llama(),test=True)
+print("got a test accuracy of ", acc, " with ", len(results), " eval samples")
 
 
 
