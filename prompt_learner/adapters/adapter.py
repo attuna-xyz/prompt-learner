@@ -12,4 +12,5 @@ class Adapter:
         content = output.content.strip()
         content = content.replace("'", "")
         content = content.replace("`", "")
-        return output.content.strip()
+        content = content.replace("'", "")  
+        return content
