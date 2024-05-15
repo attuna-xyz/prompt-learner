@@ -9,4 +9,7 @@ class Adapter:
 
     def process_output(self, output: str):
         """Process the output from the language model."""
+        content = output.content.strip()
+        content = content.replace("'", "")
+        content = content.replace("`", "")
         return output.content.strip()
