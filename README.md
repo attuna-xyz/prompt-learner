@@ -1,6 +1,7 @@
 # Prompt Learner
 
 [![Documentation](https://img.shields.io/badge/docs-promptlearner.attuna.xyz-blue.svg)](https://promptlearner.attuna.xyz/)
+[![Web App](https://img.shields.io/badge/app-streamlit-black.svg)](https://prompt-learner.streamlit.app/)
 [![Discord](https://img.shields.io/badge/discord-prompt_learner-blue?logo=discord&logoColor=white&color=5d68e8)](https://discord.gg/FST9HRNKYX)
 
 

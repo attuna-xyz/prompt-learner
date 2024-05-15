@@ -22,6 +22,9 @@ about:
     - icon: github
       text: GitHub
       href: https://github.com/attuna-xyz/prompt-learner
+    - icon: fire
+      text: Try The App
+      href: https://prompt-learner.streamlit.app/
 ---
 
 ::: {#about}
