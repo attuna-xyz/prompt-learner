@@ -5,8 +5,8 @@ from prompt_learner.prompts.cot import CoT
 from prompt_learner.templates.gpt_template import GPTTemplate
 from prompt_learner.adapters.openai import OpenAI
 from prompt_learner.adapters.llama  import Llama
-from prompt_learner.optimizers.selectors.random_sampler import RandomSampler
-from prompt_learner.optimizers.selectors.diverse_sampler import DiverseSampler
+from prompt_learner.selectors.random_sampler import RandomSampler
+from prompt_learner.selectors.diverse_sampler import DiverseSampler
 from prompt_learner.evals.metrics.accuracy import Accuracy
 
 task_description = "You have to classify customer texts as Urgent or Not Urgent"

@@ -4,7 +4,7 @@ from prompt_learner.templates.gpt_template import GPTTemplate
 from prompt_learner.tasks.sql_generation import SQLGenerationTask
 from prompt_learner.examples.example import Example
 
-from prompt_learner.optimizers.selectors.random_sampler import RandomSampler
+from prompt_learner.selectors.random_sampler import RandomSampler
 from prompt_learner.prompts.cot import CoT
 
 

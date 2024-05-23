@@ -1,7 +1,7 @@
 """A class for a Generic Prompt."""
 from pydantic import Field, BaseModel
-from prompt_learner.optimizers.selectors.selector import Selector
-from prompt_learner.optimizers.selectors.random_sampler import RandomSampler
+from prompt_learner.selectors.selector import Selector
+from prompt_learner.selectors.random_sampler import RandomSampler
 from prompt_learner.templates.template import Template
 
 

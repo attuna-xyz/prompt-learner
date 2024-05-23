@@ -6,9 +6,9 @@ from prompt_learner.tasks.classification import ClassificationTask
 
 from prompt_learner.examples.example import Example
 
-from prompt_learner.optimizers.selectors.random_sampler import RandomSampler
-from prompt_learner.optimizers.selectors.stratified_sampler import StratifiedSampler
-from prompt_learner.optimizers.selectors.diverse_sampler import DiverseSampler
+from prompt_learner.selectors.random_sampler import RandomSampler
+from prompt_learner.selectors.stratified_sampler import StratifiedSampler
+from prompt_learner.selectors.diverse_sampler import DiverseSampler
 from prompt_learner.prompts.cot import CoT
 from prompt_learner.prompts.prompt import Prompt #can call it base prompt
 
