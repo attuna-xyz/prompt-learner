@@ -17,3 +17,6 @@ class Llama(Adapter):
             groq_api_key=os.getenv('GROQ_API_KEY'),
             temperature=self.temperature,
             max_tokens=self.max_tokens)
+    
+    def __repr__(self):
+        return f"""Llama Adapter(model_name={self.llm.model_name})"""

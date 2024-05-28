@@ -17,3 +17,6 @@ class OpenAI(Adapter):
             model=model_name,
             temperature=self.temperature,
             max_tokens=self.max_tokens)
+
+    def __repr__(self):
+        return f"""Openai Adapter(model_name={self.llm.model_name})"""

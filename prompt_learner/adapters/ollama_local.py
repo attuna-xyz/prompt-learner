@@ -1,7 +1,6 @@
 """This module contains the Ollama class
 which is used to interact with any model from Ollama."""
 
-import os
 from langchain_community.llms import Ollama
 from dotenv import load_dotenv
 from .adapter import Adapter
@@ -23,3 +22,6 @@ class OllamaLocal(Adapter):
         content = content.replace("`", "")
         content = content.replace("'", "")  
         return content
+    
+    def __repr__(self):
+        return f"""Ollama Adapter(model_name={self.llm.model})"""

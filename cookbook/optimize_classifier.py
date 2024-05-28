@@ -1,6 +1,6 @@
 from prompt_learner.adapters.openai import OpenAI
 
-from prompt_learner.templates.gpt_template import GPTTemplate
+from prompt_learner.templates.markdown import MarkdownTemplate
 
 from prompt_learner.tasks.classification import ClassificationTask
 
@@ -31,10 +31,10 @@ with open("data/support_texts_test.csv") as f:
         classification_task.add_example(Example(text=text.strip(), label=label.strip()), test=True)
 
 task = classification_task
-gpt_template = GPTTemplate(task=classification_task)
+markdown_template = MarkdownTemplate(task=classification_task)
 sampler = StratifiedSampler(num_samples=2, task=classification_task)
 sampler.select_examples()
-gpt_prompt = CoT(template=gpt_template)
+gpt_prompt = CoT(template=markdown_template)
 gpt_prompt.assemble_prompt()
 print(gpt_prompt.prompt)
 print("Evals,")
@@ -44,7 +44,7 @@ acc, num_total_samplers = Accuracy(classification_task).compute(gpt_prompt, Open
 print("got a test accuracy of ", acc, " with ", num_total_samplers, " eval samples")
 sampler = DiverseSampler(num_samples=4, task=classification_task)
 sampler.select_examples()
-gpt_prompt = CoT(template=gpt_template)
+gpt_prompt = CoT(template=markdown_template)
 gpt_prompt.assemble_prompt()
 print(gpt_prompt.prompt)
 print("Evals,")
@@ -59,10 +59,10 @@ print("got a test accuracy of ", acc, " with ", num_total_samplers, " eval sampl
 
 #--
 
-# claude_template = ClaudeTemplate(classification_task,sampler)
+# claude_template = XmlTemplate(classification_task,sampler)
 
 # print(claude_template.prompt)
-# final_prompt = gpt_template.add_prediction_sample("My package is missing")
+# final_prompt = markdown_template.add_prediction_sample("My package is missing")
 # answer = classification_task.predict(OpenAI(), final_prompt)
 # print("ANSWER:", answer)
 # print("Valid output>", classification_task.validate_prediction("My package is missing", answer))

@@ -1,7 +1,7 @@
 from prompt_learner.translator.translate import Translate
 from prompt_learner.tasks.classification import ClassificationTask
-from prompt_learner.templates.openai_template import GPTTemplate
-from prompt_learner.templates.anthropic_template import ClaudeTemplate
+from prompt_learner.templates.openai_template import MarkdownTemplate
+from prompt_learner.templates.xml import XmlTemplate
 easy="""You are going to get an input prompt and you have to extract parts of it.
 You are a helpful AI assistant.
 You are helping a user with a Classification task.
@@ -24,7 +24,7 @@ Below is some example classifications. the format is the news item followed by c
 
 """
 tr=Translate(input_prompt=difficult)
-tr.translate(ClassificationTask, GPTTemplate)
+tr.translate(ClassificationTask, MarkdownTemplate)
 print(tr.prompt)
-tr.translate(ClassificationTask, ClaudeTemplate)
+tr.translate(ClassificationTask, XmlTemplate)
 print(tr.prompt)

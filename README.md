@@ -36,10 +36,11 @@ pip install prompt-learner
 ## How it works
 ![Architecture](docs/concepts/images/architecture.png)
 Prompt-learner runs on the above architecture.
-Starting from the left, the user has to decide on 3 aspects -
+Starting from the left, the user has to decide on 4 aspects -
 1. The Task
-2. A set of Examples
-3. An LLM Adapter
+2. A Template format for your prompt
+3. A set of Examples
+4. An LLM model to use
 
 A task and examples feed into the template of choice (Claude, Open AI..).
 The task and examples also interact with selectors which can pick the best n examples for the task using statistical and machine learning techniques.

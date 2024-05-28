@@ -2,7 +2,7 @@ from prompt_learner.tasks.classification import ClassificationTask
 from prompt_learner.examples.example import Example
 from prompt_learner.prompts.prompt import Prompt
 from prompt_learner.prompts.cot import CoT
-from prompt_learner.templates.gpt_template import GPTTemplate
+from prompt_learner.templates.markdown import MarkdownTemplate
 from prompt_learner.adapters.openai import OpenAI
 from prompt_learner.adapters.llama  import Llama
 from prompt_learner.selectors.random_sampler import RandomSampler
@@ -13,7 +13,7 @@ task_description = "You have to classify customer texts as Urgent or Not Urgent"
 allowed_labels = ["Urgent", "Not Urgent"]
 classification_task = ClassificationTask(description=task_description, allowed_labels=allowed_labels)
 
-template = GPTTemplate(task=classification_task)
+template = MarkdownTemplate(task=classification_task)
 
 classification_task.add_example(Example(text="Could you provide me with more information about your refund policy?", label="Not Urgent"))
 classification_task.add_example(Example(text="My service is down and I am losing sales because of this!", label="Urgent"))

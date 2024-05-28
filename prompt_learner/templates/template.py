@@ -35,3 +35,7 @@ class Template(BaseModel):
     def add_prediction_sample(self, text: str, context: str):
         """Add inference instructions to task."""
         # This method will be overridden in subclasses
+
+    @classmethod
+    def class_repr(cls):
+        return "Template"

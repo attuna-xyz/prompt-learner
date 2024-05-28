@@ -15,5 +15,4 @@ class RandomSampler(Selector):
         return self
 
     def __repr__(self):
-        return f"""RandomSampler(task={self.task},
-        num_samples={self.num_samples}"""
+        return f"""RandomSampler(num_samples={self.num_samples})"""

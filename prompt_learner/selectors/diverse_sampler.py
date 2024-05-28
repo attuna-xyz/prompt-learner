@@ -39,3 +39,6 @@ class DiverseSampler(Selector):
 
         self.selected_examples = [self.all_examples[i] for i in indices]
         self.task.selected_examples = self.selected_examples
+    
+    def __repr__(self):
+        return f"""DiverseSampler(num_samples={self.num_samples})"""

@@ -2,7 +2,6 @@
 which is an adapter for the Anthropic language model API."""
 
 import os
-import re
 from langchain_anthropic import ChatAnthropic
 from dotenv import load_dotenv
 from .adapter import Adapter
@@ -19,17 +18,5 @@ class Anthropic(Adapter):
                 temperature=self.temperature,
                 max_tokens=self.max_tokens)
 
-    def extract_xml_tag(self, data: str, tag: str) -> str:
-        """Extracts the data between the XML tags."""
-        open_tag = "<" + tag + ">"
-        close_tag = "</" + tag + ">"
-        try:
-            data = (data.split(open_tag)[1]).split(close_tag)[0].strip()
-        except IndexError:
-            pass
-        data = re.sub(r"^\\n|\\n$", "", data)
-        return data
-    
-    def process_output(self, output: str):
-        """Process the output from the language model."""
-        return self.extract_xml_tag(output.content.strip(), "label")
+    def __repr__(self):
+        return f"""Anthropic Adapter(model_name={self.llm.model})"""

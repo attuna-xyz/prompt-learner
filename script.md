@@ -39,8 +39,8 @@ classification_task = ClassificationTask(description=classification_description,
 
 **Narrator (Voice Over):** Every single Language Model was trained in a very specific way and responds differently to different formatting patterns. For example, Anthropic recommends using xml tags when using Claude. However, xml tags can even be useful in OpenAI's GPT set of models even though they are not strictly recommended because they help in giving clarity to different sections. You can mix and match these templates using prompt learner that ensures recommended formatting.  Lets use the Open AI template for now. 
 
-from prompt_learner.templates.gpt_template import GPTTemplate
-template = GPTTemplate(task=classification_task)
+from prompt_learner.markdown import MarkdownTemplate
+template = MarkdownTemplate(task=classification_task)
 
 **Narrator (Voice Over):** "That completes the task overview.
  Examples are the backbone of any classification task. Prompt-Learner allows you to integrate examples seamlessly to train your model more effectively. 

@@ -1,4 +1,5 @@
 """Class for a Generic Adapter"""
+import re
 
 
 class Adapter:
@@ -12,5 +13,21 @@ class Adapter:
         content = output.content.strip()
         content = content.replace("'", "")
         content = content.replace("`", "")
-        content = content.replace("'", "")  
+        content = content.replace("'", "")
+        #if xml tag is not present, it will return the content as it is
+        content = self.extract_xml_tag(content, "label")
         return content
+
+    def extract_xml_tag(self, data: str, tag: str) -> str:
+        """Extracts the data between the XML tags."""
+        open_tag = "<" + tag + ">"
+        close_tag = "</" + tag + ">"
+        try:
+            data = (data.split(open_tag)[1]).split(close_tag)[0].strip()
+        except IndexError:
+            pass
+        data = re.sub(r"^\\n|\\n$", "", data)
+        return data
+
+    def __repr__(self):
+        return "Generic Adapter"

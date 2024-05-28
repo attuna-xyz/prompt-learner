@@ -1,11 +1,11 @@
-"""This module contains the ClaudeTemplate class"""
+"""This module contains the XmlTemplate class"""
 from typing import List
 from prompt_learner.examples.example import Example
 from .template import Template
 
 
-class ClaudeTemplate(Template):
-    """This class generates a template for Anthropic completions"""
+class XmlTemplate(Template):
+    """This class generates a Xml template"""
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         tasks_with_labels = ["Classification", "Tagging"]
@@ -43,3 +43,7 @@ class ClaudeTemplate(Template):
             return prediction_preamble + f"""  \n <schema>{context} <\schema>\m <SQL>"""
         else:
             return prediction_preamble + "<output>"
+
+    @classmethod
+    def class_repr(cls):
+        return "XmlTemplate"

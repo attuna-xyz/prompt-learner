@@ -9,7 +9,7 @@ class Selector(BaseModel):
     """Defines the contract for a Generic Example Selector."""
     all_examples: List[Example] = []
     selected_examples: List[Example] = []
-    task: Task
+    task: Task = None
     num_samples: int = Field(description="Number of examples to samples", default=1)
     
     def __init__(self, **kwargs):
