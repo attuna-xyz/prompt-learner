@@ -1,7 +1,7 @@
 """Class for grid search optimization."""
 from prompt_learner.optimizers.optimizer import Optimizer
 from prompt_learner.evals.metrics.accuracy import Accuracy
-
+from tqdm import tqdm
 
 class GridSearch(Optimizer):
     """Grid search optimizer."""
@@ -16,18 +16,21 @@ class GridSearch(Optimizer):
         all_adapters = param_grid.get('adapter',None)
         if all_samplers is not None:
             return self.search_samplers(all_samplers, all_templates, all_adapters)
-        for template in all_templates:
-            self.prompt.translate(template)
-            for adapter in all_adapters:
-                acc, _ = Accuracy(self.prompt.template.task).compute(self.prompt, adapter)
-                score = acc
-                curr_params = {'score': score, 
-                               'template': template.class_repr(),
-                               'adapter': repr(adapter)}
-                all_results.append(curr_params)
-                if score > best_score:
-                    best_score = score
-                    best_params = curr_params
+        total_iterations = len(all_templates) * len(all_adapters)
+        with tqdm(total=total_iterations, desc="Grid Search Progress") as pbar:
+            for template in all_templates:
+                self.prompt.translate(template)
+                for adapter in all_adapters:
+                    acc, _ = Accuracy(self.prompt.template.task).compute(self.prompt, adapter)
+                    score = acc
+                    curr_params = {'score': score, 
+                                'template': template.class_repr(),
+                                'adapter': repr(adapter)}
+                    all_results.append(curr_params)
+                    if score > best_score:
+                        best_score = score
+                        best_params = curr_params
+                    pbar.update(1)
 
         return best_params, all_results
     
@@ -36,21 +39,24 @@ class GridSearch(Optimizer):
         best_score = 0
         best_params = {}
         all_results = []
-        for sampler in all_samplers:
-            sampler.task = self.prompt.template.task
-            sampler.select_examples()
-            for template in all_templates:
-                self.prompt.translate(template)
-                for adapter in all_adapters:
-                    acc, _ = Accuracy(sampler.task).compute(self.prompt, adapter)
-                    score = acc
-                    curr_params = {'score': score, 'sampler': repr(sampler),
-                                   'template': template.class_repr(),
-                                   'adapter': repr(adapter)}
-                    all_results.append(curr_params)
-                    if score > best_score:
-                        best_score = score
-                        best_params = curr_params
+        total_iterations = len(all_samplers) * len(all_templates) * len(all_adapters)
+        with tqdm(total=total_iterations, desc="Grid Search Progress") as pbar:
+            for sampler in all_samplers:
+                sampler.task = self.prompt.template.task
+                sampler.select_examples()
+                for template in all_templates:
+                    self.prompt.translate(template)
+                    for adapter in all_adapters:
+                        acc, _ = Accuracy(sampler.task).compute(self.prompt, adapter)
+                        score = acc
+                        curr_params = {'score': score, 'sampler': repr(sampler),
+                                       'template': template.class_repr(),
+                                       'adapter': repr(adapter)}
+                        all_results.append(curr_params)
+                        if score > best_score:
+                            best_score = score
+                            best_params = curr_params
+                        pbar.update(1)
 
         return best_params, all_results
 
