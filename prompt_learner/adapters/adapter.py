@@ -20,10 +20,9 @@ class Adapter:
 
     def extract_xml_tag(self, data: str, tag: str) -> str:
         """Extracts the data between the XML tags."""
-        open_tag = "<" + tag + ">"
         close_tag = "</" + tag + ">"
-        try:
-            data = (data.split(open_tag)[1]).split(close_tag)[0].strip()
+        try:#since we prefill response with opening tag, only closing tag is checked
+            data = data.split(close_tag)[0].strip()
         except IndexError:
             pass
         data = re.sub(r"^\\n|\\n$", "", data)
