@@ -23,10 +23,8 @@ class Task(BaseModel): #TO_DO enum for all task types
         if not self.validate_example(example):
             raise ValueError(f"""Label '{example.label}' is not in
                              allowed labels for this task.""")
-        if test is False:
-            self.examples.append(example)
-            self.selected_examples.append(example)
-        else:
+        self.examples.append(example)            
+        if test:
             self.test_examples.append(example)
 
     def predict(self, adapter: Adapter, prompt: str):

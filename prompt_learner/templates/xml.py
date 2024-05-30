@@ -11,14 +11,14 @@ class XmlTemplate(Template):
         tasks_with_labels = ["Classification", "Tagging"]
         self.descriptor = f"""You are a helpful AI assistant.  \nYou are helping a user with a {self.task_type} task.  \nThe user gives you the following task description.  \n<task_description>{self.task_description}</task_description>  \n"""
         if self.allowed_labels:
-            self.descriptor += f"""You have to select from the following labels.  \n<allowed_labels>{self.allowed_labels}</allowed_labels>"""
+            self.descriptor += f"""You have to select from the following labels.  \n<allowed_labels>{self.allowed_labels}</allowed_labels>  \n"""
         if self.task_type in tasks_with_labels:
-            self.prediction_preamble = f"""Given the text, you have to now predict the labels from list of allowed labels - {self.allowed_labels}.  \nOutput only the label(s) and close the <label> tag."""
+            self.prediction_preamble = f"""Given the text, you have to now predict the labels from list of allowed labels - {self.allowed_labels}.  \nOutput only the label(s) and close the <label> tag.  \n"""
         elif self.task_type == "SQLGeneration":
             self.prediction_preamble = """Given the text, you have to now generate a SQL query.  \nOnly the SQL query is expected."""
         else:  #generic preamble for prediction
             self.prediction_preamble = """Given the text, you have to now predict."""
-        self.examples_preamble = """Here are a few examples to help you understand the task better.  \n"""
+        self.examples_preamble = """Here are a few examples to help you understand the task better.\n"""
     
     def format_examples(self, examples: List[Example]):
         """Formats the task examples into a string."""
