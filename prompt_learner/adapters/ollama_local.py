@@ -15,6 +15,15 @@ class OllamaLocal(Adapter):
             model=model_name,
             temperature=self.temperature)
 
-
+    def process_output(self, output: str):
+        """Process the output from the language model."""
+        content = output.strip()
+        content = content.replace("'", "")
+        content = content.replace("`", "")
+        content = content.replace("'", "")
+        #if xml tag is not present, it will return the content as it is
+        content = self.extract_xml_tag(content, "label")
+        return content
+    
     def __repr__(self):
         return f"""Ollama Adapter(model_name={self.llm.model})"""
