@@ -23,7 +23,7 @@ See the documentation on ["Why Prompt Learner?"](https://promptlearner.attuna.xy
 
 ## Getting started
 
-[![Watch our quick start guide](https://cdn.loom.com/sessions/thumbnails/94f5345736d34af3b8b6b41e1be4c2a3-with-play.gif)](https://www.loom.com/share/94f5345736d34af3b8b6b41e1be4c2a3)
+[![Watch our quick start guide](https://cdn.loom.com/sessions/thumbnails/fc9c48d9d59e41d2aa3d1ee56675041f-with-play.gif)](https://www.loom.com/share/fc9c48d9d59e41d2aa3d1ee56675041f)
 
 You can `pip install` Prompt Learner: 
 
