@@ -10,6 +10,7 @@ website:
         text: Home
       - getting-started.qmd
       - sidebar:concepts
+      - sidebar:tutorials
       - why.qmd
   sidebar:
   - id: ""
@@ -20,6 +21,12 @@ website:
     contents:
       - why.qmd
       - auto: concepts/*.qmd
+  - id: tutorials
+    title: "Tutorials"
+    style: "docked"
+    collapse-level: 2
+    contents:
+      - auto: tutorials/*.qmd
   - id: contribute
     title: "Contribute"
     style: "docked"

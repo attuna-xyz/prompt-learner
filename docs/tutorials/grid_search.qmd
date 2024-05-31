@@ -1,0 +1,139 @@
+---
+title: "Grid Search"
+sidebar: grid-search
+---
+ 
+Here is a step by step approach to run prompt-learner to perform a grid search over sampler, llms and templates. We will show a drastic improvement on a 15 class classification task using local ollama model and grid search.
+
+### Grid Search using Prompt-Learner
+
+1. Import specific modules
+```{python}
+#| eval: false
+from prompt_learner.tasks.classification import ClassificationTask
+from prompt_learner.examples.example import Example
+from prompt_learner.selectors.random_sampler import RandomSampler
+from prompt_learner.selectors.diverse_sampler import DiverseSampler
+from prompt_learner.selectors.stratified_sampler import StratifiedSampler
+from prompt_learner.prompts.prompt import Prompt
+from prompt_learner.templates.markdown import MarkdownTemplate
+from prompt_learner.templates.xml import XmlTemplate
+from prompt_learner.adapters.ollama_local import OllamaLocal
+from prompt_learner.adapters.anthropic import Anthropic
+from prompt_learner.adapters.llama import Llama
+from prompt_learner.adapters.openai import OpenAI
+from prompt_learner.evals.metrics.accuracy import Accuracy
+from prompt_learner.optimizers.grid_search import GridSearch
+```
+
+2. Describe your task & Specify allowed labels
+```{python}
+TASK_DESCRIPTION = "You have to classify intent for customer messages sent to chatbot."
+ALLOWED_LABELS = ['INFO_ADD_REMOVE_VEHICLE', 'INFO_LOGIN_ERROR',
+       'INFO_ADD_REMOVE_INSURED', 'INFO_ERS', 'INFO_CAREERS',
+       'INFO_DIFFERENT_AMTS', 'INFO_SPEAK_TO_REP', 'INFO_CANCEL_INS_POLICY',
+       'INFO_UPDATE_LIENHOLDER', 'INFO_DELETE_DUPE_PYMT',
+       'INFO_CANT_SEE_FARM_RANCH_POLICY', 'INFO_AUTO_INS_CANADA',
+       'INFO_DEC_PAGE_NEEDED', 'INFO_LIFE_BENEFICIARY_CHANGE',
+       'INFO_MAKE_PYMT']
+```
+3. Create the classification task and attach it to a Markdown template
+```{python}
+#| eval: false
+classification_task = ClassificationTask(description=TASK_DESCRIPTION,
+                                         allowed_labels=ALLOWED_LABELS)
+
+# Template for the task
+template = MarkdownTemplate(task=classification_task)
+
+```
+4. Add train and test examples to your task
+```{python}
+#| eval: false
+# Load training data
+with open("data/train.csv") as f:
+    for line in f:
+        text, label = line.split(",")
+        classification_task.add_example(Example(text=text.strip(), label=label.strip()))
+#Add test examples
+with open("data/test.csv") as f:
+    for line in f:
+        text, label = line.split(",")
+        classification_task.add_example(Example(text=text.strip(),
+                                                label=label.strip()),
+                                                test=True)
+```
+5. Sample a random example from the training data
+```{python}
+#| eval: false
+sampler = RandomSampler(num_samples=1, task=classification_task)
+sampler.select_examples()
+```
+6. Assemble the prompt using the template
+```{python}
+#| eval: false
+base_prompt = Prompt(template=template)
+base_prompt.assemble_prompt()
+print(base_prompt.prompt)
+```
+7. See performance on llama3 without any grid search
+
+```{python}
+#| eval: false
+acc, results = Accuracy(classification_task).compute(base_prompt,
+                                                     OllamaLocal(model_name='llama3'),
+                                                     test=True)
+print(acc)
+print(results)
+```
+8. Initialize a grid search on the current prompt
+```{python}
+#| eval: false
+grid_search = GridSearch(prompt=base_prompt)
+random_4_shot = RandomSampler(num_samples=4, task=classification_task)
+random_15_shot = RandomSampler(num_samples=15, task=classification_task)
+diverse_15_shot = DiverseSampler(num_samples=15, task=classification_task)
+stratify_15_shot = StratifiedSampler(num_samples=1, task=classification_task)
+```
+9. Optionally you can add other templates and llm adapters to grid search over.
+```{python}
+#| eval: false
+param_grid = {
+    'sampler': [random_4_shot, random_15_shot,diverse_15_shot,stratify_15_shot],
+    'template': [MarkdownTemplate],#, XmlTemplate],
+    'adapter': [OllamaLocal(model_name='llama3')]#, Anthropic(model_name="claude-3-haiku-20240307"), OpenAI(model_name='gpt-4o')]
+}
+# automatically runs evaluation on all examples that are not in the prompt
+```
+10. Run the grid search and look at the results
+```{python}
+#| eval: false
+best_params, all_results = grid_search.search(param_grid)
+print(all_results)
+```
+
+11. Assemble the best prompt obtained from grid search.
+```{python}
+#| eval: false
+template = MarkdownTemplate(task=classification_task)
+sampler = StratifiedSampler(num_samples=1, task=classification_task)
+sampler.select_examples()
+
+best_prompt = Prompt(template=template)
+best_prompt.assemble_prompt()
+```
+
+12. Look at the constructed prompt.
+```{python}
+#| eval: false
+print(best_prompt.prompt)
+```
+13. Run the best prompt on test dataset!
+```{python}
+#| eval: false
+acc, results = Accuracy(classification_task).compute(best_prompt,
+                                                     OllamaLocal(model_name = "llama3"),
+                                                     test=True)
+print(acc)
+print(results)
+```

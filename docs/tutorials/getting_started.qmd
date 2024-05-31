@@ -33,8 +33,8 @@ classification_task.add_example(Example(text="I got my package", label="Not Urge
 5. Choose an LLM Provider template
 ```{python}
 #| eval: false
-from prompt_learner.templates import markdown_template
-markdown_template = markdown_template.MarkdownTemplate(task=classification_task)
+from prompt_learner.templates import markdown
+markdown_template = markdown.MarkdownTemplate(task=classification_task)
 ```
 6. Run any Optimizer to sample Examples for inserting in prompt
 ```{python}

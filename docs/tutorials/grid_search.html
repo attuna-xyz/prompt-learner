@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>docs - Optimizing a Prompt</title>
+<title>docs - Grid Search</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/optimize_customer_text_classifier.html">Optimizing a Prompt</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/grid_search.html">Grid Search</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -214,13 +214,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/grid_search.html" class="sidebar-item-text sidebar-link">
+  <a href="../tutorials/grid_search.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Grid Search</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/optimize_customer_text_classifier.html" class="sidebar-item-text sidebar-link active">
+  <a href="../tutorials/optimize_customer_text_classifier.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optimizing a Prompt</span></a>
   </div>
 </li>
@@ -234,10 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#using-prompt-learner" id="toc-using-prompt-learner" class="nav-link active" data-scroll-target="#using-prompt-learner">Using Prompt-Learner</a>
-  <ul class="collapse">
-  <li><a href="#prompt-learner-for-classification-task" id="toc-prompt-learner-for-classification-task" class="nav-link" data-scroll-target="#prompt-learner-for-classification-task">Prompt-learner for Classification Task</a></li>
-  </ul></li>
+  <li><a href="#grid-search-using-prompt-learner" id="toc-grid-search-using-prompt-learner" class="nav-link active" data-scroll-target="#grid-search-using-prompt-learner">Grid Search using Prompt-Learner</a></li>
   </ul>
 </nav>
     </div>
@@ -246,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Optimizing a Prompt</h1>
+<h1 class="title">Grid Search</h1>
 </div>
 
 
@@ -263,87 +260,150 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="using-prompt-learner" class="level1">
-<h1>Using Prompt-Learner</h1>
-<p>We will use prompt-learner to optimize the prompt for a customer support text classifier task.</p>
-<section id="prompt-learner-for-classification-task" class="level3">
-<h3 class="anchored" data-anchor-id="prompt-learner-for-classification-task">Prompt-learner for Classification Task</h3>
+<p>Here is a step by step approach to run prompt-learner to perform a grid search over sampler, llms and templates. We will show a drastic improvement on a 15 class classification task using local ollama model and grid search.</p>
+<section id="grid-search-using-prompt-learner" class="level3">
+<h3 class="anchored" data-anchor-id="grid-search-using-prompt-learner">Grid Search using Prompt-Learner</h3>
 <ol type="1">
-<li>Describe your task</li>
+<li>Import specific modules</li>
 </ol>
-<div id="07a91afa" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>classification_description <span class="op">=</span> <span class="st">"You have to classify customer texts as Urgent or Not Urgent"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="36d9270b" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.tasks.classification <span class="im">import</span> ClassificationTask</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.examples.example <span class="im">import</span> Example</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.selectors.random_sampler <span class="im">import</span> RandomSampler</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.selectors.diverse_sampler <span class="im">import</span> DiverseSampler</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.selectors.stratified_sampler <span class="im">import</span> StratifiedSampler</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.prompts.prompt <span class="im">import</span> Prompt</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.templates.markdown <span class="im">import</span> MarkdownTemplate</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.templates.xml <span class="im">import</span> XmlTemplate</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.adapters.ollama_local <span class="im">import</span> OllamaLocal</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.adapters.anthropic <span class="im">import</span> Anthropic</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.adapters.llama <span class="im">import</span> Llama</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.adapters.openai <span class="im">import</span> OpenAI</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.evals.metrics.accuracy <span class="im">import</span> Accuracy</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.optimizers.grid_search <span class="im">import</span> GridSearch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
-<li>Specify allowed labels</li>
+<li>Describe your task &amp; Specify allowed labels</li>
 </ol>
-<div id="3fc0a750" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>classification_labels <span class="op">=</span> [<span class="st">"Urgent"</span>, <span class="st">"Not Urgent"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="14f086f7" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>TASK_DESCRIPTION <span class="op">=</span> <span class="st">"You have to classify intent for customer messages sent to chatbot."</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ALLOWED_LABELS <span class="op">=</span> [<span class="st">'INFO_ADD_REMOVE_VEHICLE'</span>, <span class="st">'INFO_LOGIN_ERROR'</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       <span class="st">'INFO_ADD_REMOVE_INSURED'</span>, <span class="st">'INFO_ERS'</span>, <span class="st">'INFO_CAREERS'</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>       <span class="st">'INFO_DIFFERENT_AMTS'</span>, <span class="st">'INFO_SPEAK_TO_REP'</span>, <span class="st">'INFO_CANCEL_INS_POLICY'</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>       <span class="st">'INFO_UPDATE_LIENHOLDER'</span>, <span class="st">'INFO_DELETE_DUPE_PYMT'</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>       <span class="st">'INFO_CANT_SEE_FARM_RANCH_POLICY'</span>, <span class="st">'INFO_AUTO_INS_CANADA'</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       <span class="st">'INFO_DEC_PAGE_NEEDED'</span>, <span class="st">'INFO_LIFE_BENEFICIARY_CHANGE'</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>       <span class="st">'INFO_MAKE_PYMT'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="3" type="1">
-<li>Create the classification task</li>
+<li>Create the classification task and attach it to a Markdown template</li>
 </ol>
-<div id="b2bef143" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.tasks <span class="im">import</span> classification</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>classification_task <span class="op">=</span> classification.ClassificationTask(description<span class="op">=</span>classification_description, allowed_labels<span class="op">=</span>classification_labels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="2eea2691" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>classification_task <span class="op">=</span> ClassificationTask(description<span class="op">=</span>TASK_DESCRIPTION,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                                         allowed_labels<span class="op">=</span>ALLOWED_LABELS)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Template for the task</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>template <span class="op">=</span> MarkdownTemplate(task<span class="op">=</span>classification_task)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
-<li>Add a few examples to your task</li>
+<li>Add train and test examples to your task</li>
 </ol>
-<div id="4ca1878f" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.examples <span class="im">import</span> Example</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>classification_task.add_example(Example(text<span class="op">=</span><span class="st">"I need help"</span>, label<span class="op">=</span><span class="st">"Urgent"</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>classification_task.add_example(Example(text<span class="op">=</span><span class="st">"I got my package"</span>, label<span class="op">=</span><span class="st">"Not Urgent"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a840ace6" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load training data</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data/train.csv"</span>) <span class="im">as</span> f:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> f:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        text, label <span class="op">=</span> line.split(<span class="st">","</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        classification_task.add_example(Example(text<span class="op">=</span>text.strip(), label<span class="op">=</span>label.strip()))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Add test examples</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data/test.csv"</span>) <span class="im">as</span> f:</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> f:</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        text, label <span class="op">=</span> line.split(<span class="st">","</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        classification_task.add_example(Example(text<span class="op">=</span>text.strip(),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                                                label<span class="op">=</span>label.strip()),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                                                test<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="5" type="1">
-<li>Choose an LLM Provider template</li>
+<li>Sample a random example from the training data</li>
 </ol>
-<div id="3e2654c5" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.templates <span class="im">import</span> markdown_template</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>markdown_template <span class="op">=</span> markdown_template.MarkdownTemplate(task<span class="op">=</span>classification_task)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f3f784df" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> RandomSampler(num_samples<span class="op">=</span><span class="dv">1</span>, task<span class="op">=</span>classification_task)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sampler.select_examples()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="6" type="1">
-<li>Run any Optimizer to sample Examples for inserting in prompt</li>
+<li>Assemble the prompt using the template</li>
 </ol>
-<div id="95aebbc2" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.selectors <span class="im">import</span> random_sampler</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> random_sampler.RandomSampler(num_samples<span class="op">=</span><span class="dv">1</span>, task<span class="op">=</span>classification_task)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sampler.select_examples()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5694378c" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>base_prompt <span class="op">=</span> Prompt(template<span class="op">=</span>template)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>base_prompt.assemble_prompt()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(base_prompt.prompt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="7" type="1">
-<li>Assemble the prompt with selected examples, and any prompting technique (example, Chain of Thought)</li>
+<li>See performance on llama3 without any grid search</li>
 </ol>
-<div id="6fc62963" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.prompts <span class="im">import</span> cot</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>gpt_prompt <span class="op">=</span> cot.CoT(template<span class="op">=</span>markdown_template)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>gpt_prompt.assemble_prompt()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="00699a46" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>acc, results <span class="op">=</span> Accuracy(classification_task).compute(base_prompt,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                                                     OllamaLocal(model_name<span class="op">=</span><span class="st">'llama3'</span>),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                                                     test<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(acc)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="8" type="1">
-<li>View your prompt!</li>
+<li>Initialize a grid search on the current prompt</li>
 </ol>
-<div id="7241643f" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gpt_prompt.prompt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e64ffd2c" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>grid_search <span class="op">=</span> GridSearch(prompt<span class="op">=</span>base_prompt)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>random_4_shot <span class="op">=</span> RandomSampler(num_samples<span class="op">=</span><span class="dv">4</span>, task<span class="op">=</span>classification_task)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>random_15_shot <span class="op">=</span> RandomSampler(num_samples<span class="op">=</span><span class="dv">15</span>, task<span class="op">=</span>classification_task)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>diverse_15_shot <span class="op">=</span> DiverseSampler(num_samples<span class="op">=</span><span class="dv">15</span>, task<span class="op">=</span>classification_task)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>stratify_15_shot <span class="op">=</span> StratifiedSampler(num_samples<span class="op">=</span><span class="dv">1</span>, task<span class="op">=</span>classification_task)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="9" type="1">
-<li>Evaluate performance of your prompt.</li>
+<li>Optionally you can add other templates and llm adapters to grid search over.</li>
 </ol>
-<div id="6fe730ca" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.evals.metrics.accuracy <span class="im">import</span> Accuracy</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>acc_score <span class="op">=</span> Accuracy(classification_task).compute(gpt_prompt, OpenAI())</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># automatically runs evaluation on all examples that are not in the prompt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8a9474ee" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'sampler'</span>: [random_4_shot, random_15_shot,diverse_15_shot,stratify_15_shot],</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'template'</span>: [MarkdownTemplate],<span class="co">#, XmlTemplate],</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'adapter'</span>: [OllamaLocal(model_name<span class="op">=</span><span class="st">'llama3'</span>)]<span class="co">#, Anthropic(model_name="claude-3-haiku-20240307"), OpenAI(model_name='gpt-4o')]</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># automatically runs evaluation on all examples that are not in the prompt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="10" type="1">
-<li>Infer using your prompt</li>
+<li>Run the grid search and look at the results</li>
 </ol>
-<div id="a1a5b0aa" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prompt_learner.adapters.openai <span class="im">import</span> OpenAI</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gpt_prompt.add_inference(<span class="st">"My package is missing"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>answer <span class="op">=</span> classification_task.predict(OpenAI(), gpt_prompt.prompt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e3cf32d6" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>best_params, all_results <span class="op">=</span> grid_search.search(param_grid)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(all_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="11" type="1">
+<li>Assemble the best prompt obtained from grid search.</li>
+</ol>
+<div id="5cd72354" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>template <span class="op">=</span> MarkdownTemplate(task<span class="op">=</span>classification_task)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> StratifiedSampler(num_samples<span class="op">=</span><span class="dv">1</span>, task<span class="op">=</span>classification_task)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>sampler.select_examples()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>best_prompt <span class="op">=</span> Prompt(template<span class="op">=</span>template)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>best_prompt.assemble_prompt()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="12" type="1">
+<li>Look at the constrcuted prompt.</li>
+</ol>
+<div id="f80ac24e" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(best_prompt.prompt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="13" type="1">
+<li>Run the best prompt on test dataset!</li>
+</ol>
+<div id="4cc26980" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>acc, results <span class="op">=</span> Accuracy(classification_task).compute(best_prompt,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                                                     OllamaLocal(model_name <span class="op">=</span> <span class="st">"llama3"</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                                                     test<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(acc)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
